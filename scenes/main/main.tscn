@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=7 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_0m654"]
+[ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_csqwp"]
+[ext_resource type="Texture2D" uid="uid://bvb48yckodn5e" path="res://assets/images/player.png" id="3_7g87i"]
+[ext_resource type="Texture2D" uid="uid://c7tr7jf7nri7u" path="res://assets/images/gun.png" id="4_gn603"]
+[ext_resource type="Texture2D" uid="uid://boalswtvwrf43" path="res://assets/images/hands.png" id="5_t8mnv"]
+[ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="6_oqvht"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0m654")
+
+[node name="map" type="Sprite2D" parent="."]
+position = Vector2(962, 542)
+texture = ExtResource("2_csqwp")
+
+[node name="player" type="Sprite2D" parent="."]
+position = Vector2(403, 685)
+texture = ExtResource("3_7g87i")
+
+[node name="gun" type="Sprite2D" parent="player"]
+position = Vector2(20, 48)
+texture = ExtResource("4_gn603")
+
+[node name="hands" type="Sprite2D" parent="player"]
+position = Vector2(-7, 54)
+texture = ExtResource("5_t8mnv")
+
+[node name="enemy" type="Sprite2D" parent="."]
+position = Vector2(1421, 689)
+texture = ExtResource("6_oqvht")
