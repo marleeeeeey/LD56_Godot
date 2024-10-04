@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="LD56_Godot"
+run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
+Globals="*res://scripts/globals.gd"
 
 [rendering]
 
