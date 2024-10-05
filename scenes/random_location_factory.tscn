@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chot4q7evgd4v"]
+
+[ext_resource type="Script" path="res://scripts/random_location_factory.gd" id="1_ypiwj"]
+
+[node name="RandomLocationFactory" type="Node"]
+script = ExtResource("1_ypiwj")

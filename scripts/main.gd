@@ -1,4 +1,3 @@
 extends Node2D
 
-func _ready():
-	pass
+@onready var enemy_location_factory: RandomLocationFactory = $EnemyLocationFactory

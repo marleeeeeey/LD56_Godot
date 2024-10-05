@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=9 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5cts8"]
 [ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_3hpfe"]
 [ext_resource type="PackedScene" uid="uid://x64fcr5spnwh" path="res://scenes/player.tscn" id="3_l6cor"]
 [ext_resource type="PackedScene" uid="uid://bvepuw0pr8v7k" path="res://scenes/enemy.tscn" id="5_wlrv0"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="6_8wk1d"]
-[ext_resource type="Script" path="res://scenes/child.gd" id="6_wbiea"]
+[ext_resource type="Script" path="res://scripts/child.gd" id="6_wbiea"]
+[ext_resource type="PackedScene" uid="uid://chot4q7evgd4v" path="res://scenes/random_location_factory.tscn" id="7_0y746"]
 [ext_resource type="PackedScene" uid="uid://cni2bqqn0bf64" path="res://scenes/child.tscn" id="7_eajlf"]
+
+[sub_resource type="Curve2D" id="Curve2D_wjdjt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -371, -314, 0, 0, 0, 0, 2236, -314)
+}
+point_count = 2
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5cts8")
@@ -16,7 +22,6 @@ texture = ExtResource("2_3hpfe")
 centered = false
 
 [node name="Enemy" parent="." instance=ExtResource("5_wlrv0")]
-script = ExtResource("6_8wk1d")
 
 [node name="Child" parent="." instance=ExtResource("7_eajlf")]
 position = Vector2(354, 889)
@@ -51,3 +56,9 @@ position = Vector2(1482, 765)
 
 [node name="Player" parent="." instance=ExtResource("3_l6cor")]
 position = Vector2(1000, 733)
+
+[node name="EnemyLocationFactory" parent="." node_paths=PackedStringArray("path_2d") instance=ExtResource("7_0y746")]
+path_2d = NodePath("Path2D")
+
+[node name="Path2D" type="Path2D" parent="EnemyLocationFactory"]
+curve = SubResource("Curve2D_wjdjt")

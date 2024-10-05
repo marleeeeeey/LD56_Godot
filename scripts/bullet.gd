@@ -8,12 +8,7 @@ var dead_timer: Timer
 
 
 func _ready() -> void:
-	dead_timer = Timer.new()
-	add_child(dead_timer)
-	dead_timer.wait_time = life_time_sec
-	dead_timer.one_shot = true
-	dead_timer.start()
-	dead_timer.timeout.connect(_on_dead_timer_timeout)
+	dead_timer = Globals.create_timer(life_time_sec, _on_dead_timer_timeout)
 	tree_exited.connect(_on_object_destroyed)
 
 
