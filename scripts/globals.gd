@@ -92,10 +92,8 @@ func get_closest_node(global_pos: Vector2, nodes: Array[Node]) -> Node:
 		if dist < closest_dist:
 			closest_target = body
 			closest_dist = dist
-	return closest_target	
+	return closest_target
 
 
 func get_closest_node_by_group_name(global_pos: Vector2, group_name: String) -> Node:
-	return get_closest_node(global_pos, get_tree().get_nodes_in_group(group_name))  
-	 
-	
+	return get_closest_node(global_pos, get_tree().get_nodes_in_group(group_name))
