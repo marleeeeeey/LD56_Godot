@@ -7,5 +7,4 @@
 script = ExtResource("1_8pcsb")
 
 [node name="enemy" type="Sprite2D" parent="."]
-position = Vector2(1537, 394)
 texture = ExtResource("1_3nlo1")
