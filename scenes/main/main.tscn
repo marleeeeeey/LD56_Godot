@@ -2,30 +2,51 @@
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_0m654"]
 [ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_csqwp"]
-[ext_resource type="Texture2D" uid="uid://bvb48yckodn5e" path="res://assets/images/player.png" id="3_7g87i"]
-[ext_resource type="Texture2D" uid="uid://c7tr7jf7nri7u" path="res://assets/images/gun.png" id="4_gn603"]
-[ext_resource type="Texture2D" uid="uid://boalswtvwrf43" path="res://assets/images/hands.png" id="5_t8mnv"]
+[ext_resource type="Texture2D" uid="uid://dah8ywfclv1to" path="res://assets/images/lupa.png" id="3_qmam3"]
+[ext_resource type="Texture2D" uid="uid://un6nas35pdxs" path="res://assets/images/sun_burn.png" id="5_v0x17"]
+[ext_resource type="Texture2D" uid="uid://bbx6ts2ruq5q1" path="res://assets/images/fire.png" id="6_o1xab"]
 [ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="6_oqvht"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0m654")
 
 [node name="map" type="Sprite2D" parent="."]
-position = Vector2(962, 542)
 texture = ExtResource("2_csqwp")
+centered = false
 
-[node name="player" type="Sprite2D" parent="."]
-position = Vector2(403, 685)
-texture = ExtResource("3_7g87i")
-
-[node name="gun" type="Sprite2D" parent="player"]
-position = Vector2(20, 48)
-texture = ExtResource("4_gn603")
-
-[node name="hands" type="Sprite2D" parent="player"]
-position = Vector2(-7, 54)
-texture = ExtResource("5_t8mnv")
+[node name="lupa" type="Sprite2D" parent="."]
+position = Vector2(-2, 38)
+texture = ExtResource("3_qmam3")
+centered = false
 
 [node name="enemy" type="Sprite2D" parent="."]
-position = Vector2(1421, 689)
+position = Vector2(1325, 311)
 texture = ExtResource("6_oqvht")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="sun" type="Sprite2D" parent="Node2D"]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(1014, 492)
+scale = Vector2(2.09645, 1.5054)
+texture = ExtResource("5_v0x17")
+
+[node name="fire" type="Sprite2D" parent="Node2D"]
+position = Vector2(1016, 490)
+scale = Vector2(0.360907, 0.325558)
+texture = ExtResource("6_o1xab")
+
+[node name="fire2" type="Sprite2D" parent="Node2D"]
+position = Vector2(863, 584)
+scale = Vector2(0.360907, 0.325558)
+texture = ExtResource("6_o1xab")
+
+[node name="fire3" type="Sprite2D" parent="Node2D"]
+position = Vector2(717, 696)
+scale = Vector2(0.360907, 0.325558)
+texture = ExtResource("6_o1xab")
+
+[node name="fire4" type="Sprite2D" parent="Node2D"]
+position = Vector2(565, 808)
+scale = Vector2(0.360907, 0.325558)
+texture = ExtResource("6_o1xab")
