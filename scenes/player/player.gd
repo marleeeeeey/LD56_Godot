@@ -26,7 +26,6 @@ func _physics_process(_delta: float) -> void:
 
 		if global_position.distance_to(target_position) > 10:
 			velocity = (target_position - global_position).normalized() * SPEED
-			# print("velocity is ", velocity)
 		else:
 			target_position = Vector2.ZERO
 			velocity = Vector2.ZERO
