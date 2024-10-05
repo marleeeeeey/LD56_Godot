@@ -9,6 +9,7 @@ size = Vector2(56.5671, 23.6227)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-4, 98)
 script = ExtResource("1_rcb2c")
+speed = 500.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

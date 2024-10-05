@@ -1,11 +1,15 @@
 extends CharacterBody2D
 
-@export var fire_scene: PackedScene
+class_name Player
+
+@export var speed := 300.0
 
 @onready var sun := %Sun
 
-const SPEED = 300.0
 var target_position := Vector2.ZERO
+
+func _ready():
+	GameManager.set_player(self)
 
 func _input(event):
 	var has_mouse_or_touch_input = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or event is InputEventScreenTouch
@@ -25,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 		
 
 		if global_position.distance_to(target_position) > 10:
-			velocity = (target_position - global_position).normalized() * SPEED
+			velocity = (target_position - global_position).normalized() * speed
 		else:
 			target_position = Vector2.ZERO
 			velocity = Vector2.ZERO

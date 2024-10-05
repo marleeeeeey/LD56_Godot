@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=9 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_0m654"]
 [ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_csqwp"]
 [ext_resource type="Texture2D" uid="uid://d0bjuc2k2clc0" path="res://assets/images/pillow_texture.png" id="3_8l4mg"]
 [ext_resource type="PackedScene" uid="uid://dsatfmcapefva" path="res://scenes/player/player.tscn" id="3_8oqao"]
-[ext_resource type="PackedScene" uid="uid://bte53arl5phpx" path="res://scenes/fire/fire.tscn" id="3_53kvw"]
 [ext_resource type="Texture2D" uid="uid://dah8ywfclv1to" path="res://assets/images/lupa.png" id="3_acbtk"]
 [ext_resource type="Texture2D" uid="uid://m6mf6oiyfyb0" path="res://assets/images/pillow.png" id="3_y7qw3"]
 [ext_resource type="PackedScene" uid="uid://cro4mv4dibaj7" path="res://scenes/dust_mite/dust_mite.tscn" id="5_3ialx"]
@@ -353,7 +352,6 @@ position = Vector2(444, 175)
 
 [node name="Player" parent="." instance=ExtResource("3_8oqao")]
 position = Vector2(257, 257)
-fire_scene = ExtResource("3_53kvw")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(4, -98)
