@@ -11,7 +11,6 @@ func _ready() -> void:
 	assert(path_2d != null, "[RandomLocationFactory] path_2d is not set!")
 	path_follow_2d = PathFollow2D.new()
 	path_2d.add_child(path_follow_2d)
-	add_child(path_2d)
 
 func get_random_location() -> Vector2:
 	path_follow_2d.progress_ratio = randf()

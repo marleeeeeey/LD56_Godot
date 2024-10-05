@@ -31,7 +31,5 @@ func _input(event: InputEvent) -> void:
 
 
 func shoot(target_position : Vector2):
-	var bullet: Bullet = bullet_scene.instantiate()
-	bullet.global_position = global_position
+	var bullet: Bullet = Globals.create_with_self_pos(self, bullet_scene)
 	bullet.rotation = (target_position - global_position).normalized().angle()
-	get_tree().root.add_child(bullet)
