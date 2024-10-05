@@ -34,8 +34,8 @@ path_2d = NodePath("Path2D")
 curve = SubResource("Curve2D_wjdjt")
 
 [node name="ChildLocationFactory" parent="." node_paths=PackedStringArray("path_2d") instance=ExtResource("7_0y746")]
-path_2d = NodePath("../Path2D")
+path_2d = NodePath("Path2D")
 use_bouding_rect = true
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Path2D" type="Path2D" parent="ChildLocationFactory"]
 curve = SubResource("Curve2D_bduhs")
