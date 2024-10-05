@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
-@export var bullet_scene: PackedScene
-
+var bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
 var speed = 300
-var click_position_canvas = Vector2.ZERO  # Stores the mouse click position
+var mouse_click_position = Vector2.ZERO
 
 
 func get_input():
@@ -28,21 +27,22 @@ func _input(event: InputEvent) -> void:
 	if not event_mouse_button.pressed:
 		return
 
-	click_position_canvas = get_global_mouse_position()
-	print("Mouse clicked at: ", click_position_canvas)
+	mouse_click_position = event_mouse_button.global_position
+	print("Mouse clicked at: ", mouse_click_position)
 	shoot()
 	queue_redraw()  # force
 
 
 func _draw():
-	if click_position_canvas != Vector2.ZERO:
-		print("Draw line from: ", global_position, " to: ", click_position_canvas)
-		draw_line(global_position, click_position_canvas, Color(1, 1, 1), 2)
-		draw_circle(click_position_canvas, 5, Color(1, 1, 1))
+	if mouse_click_position != Vector2.ZERO:
+		print("Draw line from: ", global_position, " to: ", mouse_click_position)
+		draw_line(global_position, mouse_click_position, Color(1, 1, 1), 2)
+		draw_circle(mouse_click_position, 5, Color(1, 1, 1))
 		draw_circle(global_position, 5, Color(1, 1, 1))
 
 
 func shoot():
-	var bullet = bullet_scene.instantiate()
-	owner.add_child(bullet)
-	
+	var bullet: Bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	bullet.rotation = (mouse_click_position - global_position).normalized().angle()
+	get_tree().root.add_child(bullet)

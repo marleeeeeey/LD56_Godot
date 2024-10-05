@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Bullet
+
 var speed = 2500
 var life_time_sec = 2
 var dead_timer: Timer

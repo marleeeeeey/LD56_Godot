@@ -1,3 +1,3 @@
 extends Node
 
-var IS_DEBUG: bool = true
+var IS_DEBUG: bool = false
