@@ -7,7 +7,8 @@ var speed = 100
 
 
 func _process(delta: float) -> void:
-	target = get_closest_target()
+	if not target:
+		target = Globals.get_closest_node_by_group_name(global_position, "Child")
 
 
 func _physics_process(delta: float) -> void:
@@ -20,15 +21,4 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 
 	move_and_slide()
-
-
-func get_closest_target() -> Node2D:
-	var closest_target = null
-	var closest_dist = INF
-	var spider_children = get_tree().get_nodes_in_group("Child")
-	for body: Child in spider_children:
-		var dist = global_position.distance_to(body.global_position)
-		if dist < closest_dist:
-			closest_target = body
-			closest_dist = dist
-	return closest_target
+	

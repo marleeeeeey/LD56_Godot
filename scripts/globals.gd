@@ -82,3 +82,20 @@ func calc_rect_from_path_2d(path_2d: Path2D) -> Rect2:
 			max_y = point.y
 
 	return Rect2(Vector2(min_x, min_y), Vector2(max_x - min_x, max_y - min_y))
+
+
+func get_closest_node(global_pos: Vector2, nodes: Array[Node]) -> Node:
+	var closest_target = null
+	var closest_dist = INF
+	for body: Node in nodes:
+		var dist = global_pos.distance_to(body.global_position)
+		if dist < closest_dist:
+			closest_target = body
+			closest_dist = dist
+	return closest_target	
+
+
+func get_closest_node_by_group_name(global_pos: Vector2, group_name: String) -> Node:
+	return get_closest_node(global_pos, get_tree().get_nodes_in_group(group_name))  
+	 
+	
