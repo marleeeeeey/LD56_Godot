@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=7 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_0m654"]
 [ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_csqwp"]
 [ext_resource type="Texture2D" uid="uid://bvb48yckodn5e" path="res://assets/images/player.png" id="3_7g87i"]
-[ext_resource type="Texture2D" uid="uid://c5xtnp2yxip2j" path="res://assets/images/player_hands.png" id="4_3acwh"]
+[ext_resource type="Texture2D" uid="uid://obfg4kas6yd6" path="res://assets/images/bullet.png" id="4_gi1m3"]
+[ext_resource type="Texture2D" uid="uid://cxdfjrmln4dqg" path="res://assets/images/baby_spider.png" id="6_81y2b"]
 [ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="6_oqvht"]
 
 [node name="Main" type="Node2D"]
@@ -17,10 +18,30 @@ texture = ExtResource("2_csqwp")
 position = Vector2(971, 224)
 texture = ExtResource("3_7g87i")
 
-[node name="hands" type="Sprite2D" parent="player"]
-position = Vector2(-11, 137)
-texture = ExtResource("4_3acwh")
+[node name="player2" type="Sprite2D" parent="."]
+position = Vector2(1257, 354)
+rotation = -1.76728
+texture = ExtResource("4_gi1m3")
+offset = Vector2(-0.311325, 5.86063)
 
 [node name="enemy" type="Sprite2D" parent="."]
-position = Vector2(1361, 435)
+position = Vector2(1588, 414)
 texture = ExtResource("6_oqvht")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="baby" type="Sprite2D" parent="Node2D"]
+position = Vector2(571, 844)
+texture = ExtResource("6_81y2b")
+
+[node name="baby2" type="Sprite2D" parent="Node2D"]
+position = Vector2(905, 854)
+texture = ExtResource("6_81y2b")
+
+[node name="baby3" type="Sprite2D" parent="Node2D"]
+position = Vector2(1201, 865)
+texture = ExtResource("6_81y2b")
+
+[node name="baby4" type="Sprite2D" parent="Node2D"]
+position = Vector2(1484, 866)
+texture = ExtResource("6_81y2b")
