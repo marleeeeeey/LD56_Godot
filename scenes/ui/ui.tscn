@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=8 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
 [ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_ov88f"]
 [ext_resource type="Texture2D" uid="uid://m6mf6oiyfyb0" path="res://assets/images/pillow.png" id="3_oabqm"]
 [ext_resource type="Texture2D" uid="uid://dah8ywfclv1to" path="res://assets/images/lupa.png" id="4_ecpml"]
 [ext_resource type="LabelSettings" uid="uid://cnh84tkbf88o0" path="res://scenes/ui/ui_label.tres" id="5_5fjyf"]
+[ext_resource type="Texture2D" uid="uid://celmimphh8aqv" path="res://assets/images/case.png" id="5_jtvnq"]
+[ext_resource type="Texture2D" uid="uid://btf4qcpasf5jq" path="res://assets/images/arrow.png" id="6_r1cff"]
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_jxq7h")
@@ -22,6 +24,14 @@ centered = false
 position = Vector2(479, 94)
 texture = ExtResource("4_ecpml")
 centered = false
+
+[node name="CompasCase" type="Sprite2D" parent="."]
+position = Vector2(238, 847)
+texture = ExtResource("5_jtvnq")
+
+[node name="CompasArrow" type="Sprite2D" parent="CompasCase"]
+unique_name_in_owner = true
+texture = ExtResource("6_r1cff")
 
 [node name="Info" type="Control" parent="."]
 layout_mode = 3
@@ -64,3 +74,18 @@ label_settings = ExtResource("5_5fjyf")
 unique_name_in_owner = true
 layout_mode = 2
 label_settings = ExtResource("5_5fjyf")
+
+[node name="Distance" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 206.0
+offset_top = -390.0
+offset_right = 263.0
+offset_bottom = -345.0
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "dist"
+label_settings = ExtResource("5_5fjyf")
+metadata/_edit_use_anchors_ = true

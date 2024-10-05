@@ -1,12 +1,16 @@
 extends Node
 
 const max_bugs_count: int = 30
+const closest_bug_update_time = 1.0
 
 var game_data: GameData
 var game_analytic: GameAnalytic
 
 var player: Player
 var bugs: Array[DustMite] = []
+var closest_bug: DustMite = null
+var closest_bug_direction: Vector2 = Vector2.ZERO
+var closest_bug_distance: float = INF
 
 var current_bugs_count: int = max_bugs_count
 var killed_bugs_count: int = 0
@@ -15,13 +19,22 @@ const game_field_size: Vector2 = Vector2(-4096, 4096)
 
 signal bugs_count_changed(count: int)
 signal killed_bugs_count_changed(count: int)
+signal closest_bug_info_changed(direction: Vector2, distance: float)
+
 func _ready():
 	_load_game()
 	_spawn_bugs()
-	print(game_analytic.to_json())
+
+	var timer = Timer.new()
+	timer.wait_time = closest_bug_update_time
+	timer.autostart = true
+	timer.timeout.connect(_update_closest_bug_direction)
+	add_child(timer)
 
 func set_player(_player: Player) -> void:
 	player = _player
+	closest_bug = _get_closest_bug()
+	_update_closest_bug_direction()
 
 func get_player_position() -> Vector2:
 	return player.global_position
@@ -37,23 +50,38 @@ func handle_bug_hit(bug: DustMite) -> void:
 	killed_bugs_count += 1
 	bugs_count_changed.emit(current_bugs_count)
 	killed_bugs_count_changed.emit(killed_bugs_count)
+	
+	closest_bug = _get_closest_bug()
 
-func get_closest_bug_direction() -> Vector2:
-	var closest_bug: DustMite = null
+func _get_closest_bug() -> DustMite:
+	var _closest_bug: DustMite = null
 	var closest_distance: float = INF
 
 	var player_position := get_player_position()
 
 	for bug in bugs:
+		if !bug or bug.is_dead():
+			continue
+		
 		var bug_position := bug.global_position
 		var distance := player_position.distance_to(bug_position)
 
 		if distance < closest_distance:
 			closest_distance = distance
-			closest_bug = bug
+			_closest_bug = bug
 
-	return closest_bug.global_position.direction_to(player_position)
-	
+	print("player position: ", player_position)
+	print("closest bug position: ", _closest_bug.global_position)
+	print("closest distance: ", closest_distance)
+
+	return _closest_bug
+
+func _update_closest_bug_direction() -> void:
+	var player_position := get_player_position()
+
+	closest_bug_direction = player_position.direction_to(closest_bug.global_position)
+	closest_bug_distance = player_position.distance_to(closest_bug.global_position)
+	closest_bug_info_changed.emit(closest_bug_direction, closest_bug_distance)
 
 func add_scene(scene: Node) -> void:
 	add_child(scene)

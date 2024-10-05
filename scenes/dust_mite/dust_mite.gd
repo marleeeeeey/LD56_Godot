@@ -46,6 +46,9 @@ func die():
 
 	queue_free()
 
+func is_dead() -> bool:
+	return current_state == State.DEAD
+
 func _update_state():
 	if current_state == State.RUN_AWAY and _is_safe_distance_from_player():
 		current_state = State.IDLE
