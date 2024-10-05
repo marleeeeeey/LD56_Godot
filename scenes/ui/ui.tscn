@@ -10,7 +10,7 @@
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_jxq7h")
-distance_divider = 100.0
+distance_divider = 150.0
 
 [node name="background" type="Sprite2D" parent="."]
 texture = ExtResource("2_ov88f")
@@ -22,7 +22,7 @@ texture = ExtResource("3_oabqm")
 centered = false
 
 [node name="lupa" type="Sprite2D" parent="."]
-position = Vector2(479, 94)
+position = Vector2(479, 103)
 texture = ExtResource("4_ecpml")
 centered = false
 
