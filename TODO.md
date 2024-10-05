@@ -1,12 +1,15 @@
 # Ludum Dare To-Do List
 
+- сделать арт подушки и текстуры подушки
+- ограничить выход камеры за границы
+
 ## Day 1
 
 ### Brainstorm
 
-- [ ] Generate 10+ game ideas with quick sketches and mockups
-- [ ] Write brief GDDs for top ideas
-- [ ] Select the best idea
+- [x] Generate 10+ game ideas with quick sketches and mockups
+- [x] Write brief GDDs for top ideas
+- [] Select the best idea
 
 ### Prototype
 

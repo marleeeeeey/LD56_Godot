@@ -2,46 +2,32 @@
 
 ## Elevator Pitch
 
-Save Belly City from junk food invasion in this tasty adventure where a brave Panda fights fast food armies while improving reading skills!
+Уничтож всех клопов в своей подушке! Надо поспать, но твоя подушка кишит жуками!
 
 ## Core Gameplay Loop
 
-1. Enemy food appears with syllables above their heads
-2. Player hears a syllable and chooses the correct enemy
-3. Panda attacks on correct choice, takes damage on wrong choice
-4. Player earns stars for victories, unlocking visual upgrades for the Panda
+1. Игрок перемещает лупу и ищет клопе
+2. Игрок фокусирует солнечный луч на клопе. Клоп пытается убежать, надо удержать луч на нем
+3. Игрок видит как уходит время, надо успеть всех убить за время
+4. Игрок доволен что убил всех клопов и можно спать
 
 ## Game Mechanics
 
-- JRPG-style battle screen with player on the left, three enemies on the right
-- Click/tap on the enemy with the correct syllable
-- Combo system increases star rewards and gives Panda a visual aura
-- Health system for the Panda
-- Star currency for visual upgrades
+- Нужно держать луч на клопе пару секунд чтобы его сжечь
 
 ## Controls
 
-- PC: Left mouse click on enemies
-- Mobile: Tap on enemies
+- PC: стрелки или мышь двигают лупу
+- Mobile: тап двигает лупу к точке тапа
 
 ## Game Flow
 
-- Start Screen: Title, Play button, Options
-- Main Game Screen: Battle arena with Panda and food enemies
-- Upgrade Screen: Spend stars on Panda upgrades
-- Game Over Screen: Restart or Quit options
+- Boot Screen: постер игры
+- Main Game Screen: подушка с жуками
+- Game Over Screen: Предлагаем сыграть еще
 
 ## Visual Style
 
 - Cute, minimalist 2D art style
 - Soft, muted color palette
 - Smooth, unhurried animations
-
-## Audio
-
-- Music: Light, cheerful melody (110-120 BPM)
-- Sound Effects:
-  - Panda attack: soft "woosh"
-  - Enemy hit: funny "chomp"
-  - Syllable pronunciation
-  - Star collection: coin jingle

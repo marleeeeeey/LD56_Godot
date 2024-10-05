@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsatfmcapefva"]
+[gd_scene load_steps=4 format=3 uid="uid://dsatfmcapefva"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_rcb2c"]
-[ext_resource type="Texture2D" uid="uid://dah8ywfclv1to" path="res://assets/images/lupa.png" id="2_aa665"]
 [ext_resource type="Texture2D" uid="uid://un6nas35pdxs" path="res://assets/images/sun_burn.png" id="3_whst5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adgj4"]
@@ -10,10 +9,6 @@ size = Vector2(56.5671, 23.6227)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-4, 98)
 script = ExtResource("1_rcb2c")
-
-[node name="lupa" type="Sprite2D" parent="."]
-position = Vector2(-84, 37)
-texture = ExtResource("2_aa665")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
