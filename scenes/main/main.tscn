@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_0m654"]
-[ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_csqwp"]
-[ext_resource type="Texture2D" uid="uid://bvb48yckodn5e" path="res://assets/images/player.png" id="3_7g87i"]
-[ext_resource type="Texture2D" uid="uid://obfg4kas6yd6" path="res://assets/images/bullet.png" id="4_gi1m3"]
-[ext_resource type="Texture2D" uid="uid://cxdfjrmln4dqg" path="res://assets/images/baby_spider.png" id="6_81y2b"]
-[ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="6_oqvht"]
+[ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_csqwp"]
+[ext_resource type="Texture2D" uid="uid://dbwa5q723005p" path="res://assets/images/player.png" id="3_7g87i"]
+[ext_resource type="Texture2D" uid="uid://8dyr3iwxqvaq" path="res://assets/images/bullet.png" id="4_gi1m3"]
+[ext_resource type="Texture2D" uid="uid://bvr6ivcthwr8e" path="res://assets/images/baby_spider.png" id="6_81y2b"]
+[ext_resource type="Texture2D" uid="uid://dbximnjqifbuj" path="res://assets/images/enemy.png" id="6_oqvht"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0m654")
 
 [node name="map" type="Sprite2D" parent="."]
-position = Vector2(962, 542)
 texture = ExtResource("2_csqwp")
+centered = false
 
 [node name="player" type="Sprite2D" parent="."]
 position = Vector2(971, 224)
