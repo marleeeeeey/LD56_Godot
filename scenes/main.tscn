@@ -1,15 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=7 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5cts8"]
 [ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_3hpfe"]
 [ext_resource type="PackedScene" uid="uid://x64fcr5spnwh" path="res://scenes/player.tscn" id="3_l6cor"]
-[ext_resource type="Script" path="res://scripts/child.gd" id="6_wbiea"]
 [ext_resource type="PackedScene" uid="uid://chot4q7evgd4v" path="res://scenes/random_location_factory.tscn" id="7_0y746"]
-[ext_resource type="PackedScene" uid="uid://cni2bqqn0bf64" path="res://scenes/child.tscn" id="7_eajlf"]
 
 [sub_resource type="Curve2D" id="Curve2D_wjdjt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 101, 168, 0, 0, 0, 0, 1802, 168)
+"points": PackedVector2Array(0, 0, 0, 0, 101, 168, 0, 0, 0, 0, 1777, 179)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_bduhs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1661, 1055, 0, 0, 0, 0, 200, 659)
 }
 point_count = 2
 
@@ -20,37 +24,6 @@ script = ExtResource("1_5cts8")
 texture = ExtResource("2_3hpfe")
 centered = false
 
-[node name="Child" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(354, 889)
-script = ExtResource("6_wbiea")
-
-[node name="Child2" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(596, 951)
-
-[node name="Child3" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(586, 721)
-
-[node name="Child4" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(892, 673)
-
-[node name="Child5" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(878, 957)
-
-[node name="Child6" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(1212, 717)
-
-[node name="Child7" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(789, 815)
-
-[node name="Child9" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(1135, 939)
-
-[node name="Child10" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(1345, 889)
-
-[node name="Child8" parent="." instance=ExtResource("7_eajlf")]
-position = Vector2(1482, 765)
-
 [node name="Player" parent="." instance=ExtResource("3_l6cor")]
 position = Vector2(1000, 733)
 
@@ -60,7 +33,9 @@ path_2d = NodePath("Path2D")
 [node name="Path2D" type="Path2D" parent="EnemyLocationFactory"]
 curve = SubResource("Curve2D_wjdjt")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 138.0
-offset_bottom = 23.0
-text = "123123123123123"
+[node name="ChildLocationFactory" parent="." node_paths=PackedStringArray("path_2d") instance=ExtResource("7_0y746")]
+path_2d = NodePath("../Path2D")
+use_bouding_rect = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_bduhs")

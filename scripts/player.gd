@@ -30,6 +30,6 @@ func _input(event: InputEvent) -> void:
 	shoot(mouse_click_position)
 
 
-func shoot(target_position : Vector2):
-	var bullet: Bullet = Globals.create_with_self_pos(self, bullet_scene)
+func shoot(target_position: Vector2):
+	var bullet: Bullet = Globals.create_on_parent_center(self, bullet_scene)
 	bullet.rotation = (target_position - global_position).normalized().angle()
