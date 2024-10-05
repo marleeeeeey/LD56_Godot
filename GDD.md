@@ -2,29 +2,29 @@
 
 ## Elevator Pitch
 
-Уничтож всех клопов в своей подушке! Надо поспать, но твоя подушка кишит жуками!
+Destroy all the bedbugs in your pillow! You need to sleep, but your pillow is crawling with bugs!
 
 ## Core Gameplay Loop
 
-1. Игрок перемещает лупу и ищет клопе
-2. Игрок фокусирует солнечный луч на клопе. Клоп пытается убежать, надо удержать луч на нем
-3. Игрок видит как уходит время, надо успеть всех убить за время
-4. Игрок доволен что убил всех клопов и можно спать
+1. Player moves a magnifying glass to search for bedbugs
+2. Player focuses sunlight on a bedbug. The bug tries to escape, player needs to keep the beam on it
+3. Player sees time running out, must kill all bugs before time is up
+4. Player is satisfied after killing all bedbugs and can now sleep
 
 ## Game Mechanics
 
-- Нужно держать луч на клопе пару секунд чтобы его сжечь
+- Need to keep the beam on a bug for a couple of seconds to burn it
 
 ## Controls
 
-- PC: стрелки или мышь двигают лупу
-- Mobile: тап двигает лупу к точке тапа
+- PC: arrow keys or mouse move the magnifying glass
+- Mobile: tap moves the magnifying glass to the tap point
 
 ## Game Flow
 
-- Boot Screen: постер игры
-- Main Game Screen: подушка с жуками
-- Game Over Screen: Предлагаем сыграть еще
+- Boot Screen: game poster
+- Main Game Screen: pillow with bugs
+- Game Over Screen: Offer to play again
 
 ## Visual Style
 
