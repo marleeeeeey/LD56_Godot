@@ -1,52 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=6 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_0m654"]
 [ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_csqwp"]
-[ext_resource type="Texture2D" uid="uid://dah8ywfclv1to" path="res://assets/images/lupa.png" id="3_qmam3"]
-[ext_resource type="Texture2D" uid="uid://un6nas35pdxs" path="res://assets/images/sun_burn.png" id="5_v0x17"]
-[ext_resource type="Texture2D" uid="uid://bbx6ts2ruq5q1" path="res://assets/images/fire.png" id="6_o1xab"]
-[ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="6_oqvht"]
+[ext_resource type="PackedScene" uid="uid://dsatfmcapefva" path="res://scenes/player/player.tscn" id="3_8oqao"]
+[ext_resource type="PackedScene" uid="uid://bte53arl5phpx" path="res://scenes/fire/fire.tscn" id="3_53kvw"]
+[ext_resource type="PackedScene" uid="uid://cro4mv4dibaj7" path="res://scenes/dust_mite/dust_mite.tscn" id="5_3ialx"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0m654")
 
-[node name="map" type="Sprite2D" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="map" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("2_csqwp")
 centered = false
 
-[node name="lupa" type="Sprite2D" parent="."]
-position = Vector2(-2, 38)
-texture = ExtResource("3_qmam3")
-centered = false
+[node name="DustMite" parent="." instance=ExtResource("5_3ialx")]
+position = Vector2(1273, 319)
 
-[node name="enemy" type="Sprite2D" parent="."]
-position = Vector2(1325, 311)
-texture = ExtResource("6_oqvht")
+[node name="DustMite2" parent="." instance=ExtResource("5_3ialx")]
+position = Vector2(2254, -692)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="DustMite3" parent="." instance=ExtResource("5_3ialx")]
+position = Vector2(1082, -920)
 
-[node name="sun" type="Sprite2D" parent="Node2D"]
-modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(1014, 492)
-scale = Vector2(2.09645, 1.5054)
-texture = ExtResource("5_v0x17")
-
-[node name="fire" type="Sprite2D" parent="Node2D"]
-position = Vector2(1016, 490)
-scale = Vector2(0.360907, 0.325558)
-texture = ExtResource("6_o1xab")
-
-[node name="fire2" type="Sprite2D" parent="Node2D"]
-position = Vector2(863, 584)
-scale = Vector2(0.360907, 0.325558)
-texture = ExtResource("6_o1xab")
-
-[node name="fire3" type="Sprite2D" parent="Node2D"]
-position = Vector2(717, 696)
-scale = Vector2(0.360907, 0.325558)
-texture = ExtResource("6_o1xab")
-
-[node name="fire4" type="Sprite2D" parent="Node2D"]
-position = Vector2(565, 808)
-scale = Vector2(0.360907, 0.325558)
-texture = ExtResource("6_o1xab")
+[node name="Player" parent="." instance=ExtResource("3_8oqao")]
+fire_scene = ExtResource("3_53kvw")

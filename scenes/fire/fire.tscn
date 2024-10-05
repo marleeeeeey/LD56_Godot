@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bte53arl5phpx"]
+
+[ext_resource type="Texture2D" uid="uid://bbx6ts2ruq5q1" path="res://assets/images/fire.png" id="1_kpu7f"]
+[ext_resource type="Script" path="res://scenes/fire/fire.gd" id="1_xwfvq"]
+
+[node name="Fire" type="Node2D"]
+script = ExtResource("1_xwfvq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.666263, 0.637448)
+texture = ExtResource("1_kpu7f")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
