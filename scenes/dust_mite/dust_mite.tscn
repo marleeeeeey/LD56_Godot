@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cro4mv4dibaj7"]
+[gd_scene load_steps=7 format=3 uid="uid://cro4mv4dibaj7"]
 
 [ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="1_0wudf"]
 [ext_resource type="Script" path="res://scenes/dust_mite/dust_mite.gd" id="1_je4c8"]
+[ext_resource type="PackedScene" uid="uid://clkstxwcj84px" path="res://scenes/trail/trail.tscn" id="2_hby07"]
+[ext_resource type="PackedScene" uid="uid://bte53arl5phpx" path="res://scenes/fire/fire.tscn" id="3_v2m70"]
 [ext_resource type="AudioStream" uid="uid://bsinwb1r1bn3r" path="res://assets/sfx/explosion.wav" id="3_wl813"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcdm"]
@@ -14,6 +16,8 @@ script = ExtResource("1_je4c8")
 speed = 300
 run_away_distance = 450
 run_away_safe_distance = 900
+trail_scene = ExtResource("2_hby07")
+fire_scene = ExtResource("3_v2m70")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0wudf")
@@ -24,3 +28,8 @@ shape = SubResource("RectangleShape2D_0dcdm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_wl813")
+
+[node name="TrailsTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="TrailsTimer" to="." method="_on_trails_timer_timeout"]

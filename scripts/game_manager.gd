@@ -1,7 +1,5 @@
 extends Node
 
-var fire_scene := preload("res://scenes/fire/fire.tscn")
-
 var game_data: GameData
 var game_analytic: GameAnalytic
 
@@ -24,9 +22,9 @@ func get_distance_to_player(bug: DustMite) -> float:
 
 func handle_bug_hit(bug: DustMite) -> void:
 	bug.die()
-	var fire: Fire = fire_scene.instantiate()
-	fire.position = bug.global_position
-	add_child(fire)
+
+func add_scene(scene: Node) -> void:
+	add_child(scene)
 
 func _save_game():
 	GameData.save(game_data)
