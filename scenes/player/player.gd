@@ -16,6 +16,9 @@ func _ready():
 	GameManager.set_player(self)
 
 func _input(event):
+	if !GameManager.is_game_running():
+		return
+
 	var is_mouse_event = event is InputEventMouseButton
 	var is_touch_event = event is InputEventScreenTouch
 	var is_left_click = is_mouse_event and event.button_index == MOUSE_BUTTON_LEFT
@@ -34,11 +37,12 @@ func _input(event):
 
 
 func _physics_process(_delta: float) -> void:
+	if !GameManager.is_game_running():
+		return
+
 	var current_time = Time.get_ticks_msec() / 1000.0
 	click_times = click_times.filter(func(t): return current_time - t <= max_click_age)
 	var boost_from_click = 1 + boost * click_times.size()
-
-	print("boost from click is ", boost_from_click)
 
 	if target_position != Vector2.ZERO:
 		# print("target position is ", target_position)

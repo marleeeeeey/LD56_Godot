@@ -17,6 +17,14 @@ var killed_bugs_count: int = 0
 
 const game_field_size: Vector2 = Vector2(-4096, 4096)
 
+enum GameState {
+	RUNNING,
+	WON
+}
+
+var game_state: GameState = GameState.RUNNING
+
+signal game_state_changed(state: GameState)
 signal bugs_count_changed(count: int)
 signal killed_bugs_count_changed(count: int)
 signal closest_bug_info_changed(direction: Vector2, distance: float)
@@ -30,6 +38,9 @@ func _ready():
 	timer.autostart = true
 	timer.timeout.connect(_update_closest_bug_direction)
 	add_child(timer)
+
+func is_game_running() -> bool:
+	return game_state == GameState.RUNNING
 
 func set_player(_player: Player) -> void:
 	player = _player
@@ -46,12 +57,26 @@ func get_distance_to_player(bug: DustMite) -> float:
 
 func handle_bug_hit(bug: DustMite) -> void:
 	bug.die()
+
 	current_bugs_count -= 1
 	killed_bugs_count += 1
 	bugs_count_changed.emit(current_bugs_count)
 	killed_bugs_count_changed.emit(killed_bugs_count)
-	
+
+	if current_bugs_count == 0:
+		_set_game_state(GameState.WON)
+	else:
+		closest_bug = _get_closest_bug()
+
+func reset_game() -> void:
+	current_bugs_count = max_bugs_count
+	killed_bugs_count = 0
+
+	bugs.clear()
+	_spawn_bugs()
 	closest_bug = _get_closest_bug()
+
+	_set_game_state(GameState.RUNNING)
 
 func _get_closest_bug() -> DustMite:
 	var _closest_bug: DustMite = null
@@ -77,11 +102,18 @@ func _get_closest_bug() -> DustMite:
 	return _closest_bug
 
 func _update_closest_bug_direction() -> void:
+	if game_state != GameState.RUNNING:
+		return
+
 	var player_position := get_player_position()
 
 	closest_bug_direction = player_position.direction_to(closest_bug.global_position)
 	closest_bug_distance = player_position.distance_to(closest_bug.global_position)
 	closest_bug_info_changed.emit(closest_bug_direction, closest_bug_distance)
+
+func _set_game_state(state: GameState) -> void:
+	game_state = state
+	game_state_changed.emit(game_state)
 
 func add_scene(scene: Node) -> void:
 	add_child(scene)

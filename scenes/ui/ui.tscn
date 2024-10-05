@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=9 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
 [ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_ov88f"]
@@ -7,6 +7,11 @@
 [ext_resource type="LabelSettings" uid="uid://cnh84tkbf88o0" path="res://scenes/ui/ui_label.tres" id="5_5fjyf"]
 [ext_resource type="Texture2D" uid="uid://celmimphh8aqv" path="res://assets/images/case.png" id="5_jtvnq"]
 [ext_resource type="Texture2D" uid="uid://btf4qcpasf5jq" path="res://assets/images/arrow.png" id="6_r1cff"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ufnug"]
+font_size = 64
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_jxq7h")
@@ -90,3 +95,33 @@ size_flags_horizontal = 4
 text = "dist"
 label_settings = ExtResource("5_5fjyf")
 metadata/_edit_use_anchors_ = true
+
+[node name="Win" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -367.0
+offset_top = 160.0
+offset_right = 359.0
+offset_bottom = 339.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Win"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Win/VBoxContainer"]
+layout_mode = 2
+text = "PILLOW IS CLEAN NOW!
+HAVE A REST!"
+label_settings = SubResource("LabelSettings_ufnug")
+
+[node name="VSeparator" type="VSeparator" parent="Win/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Win/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "PLAY AGAIN?"
+
+[connection signal="pressed" from="Win/VBoxContainer/Button" to="." method="_on_button_pressed"]
