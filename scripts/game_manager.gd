@@ -1,7 +1,7 @@
 extends Node
 
 const max_bugs_count: int = 30
-const closest_bug_update_time = 1.0
+const closest_bug_update_time = 0.3
 
 var game_data: GameData
 var game_analytic: GameAnalytic

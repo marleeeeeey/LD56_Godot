@@ -10,6 +10,7 @@
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_jxq7h")
+distance_divider = 100.0
 
 [node name="background" type="Sprite2D" parent="."]
 texture = ExtResource("2_ov88f")

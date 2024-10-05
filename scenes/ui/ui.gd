@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var distance_divider := 10.0
+
 func _ready() -> void:
 	GameManager.bugs_count_changed.connect(update_bug_count)
 	update_bug_count(GameManager.current_bugs_count)
@@ -15,6 +17,5 @@ func update_killed_bug_count(count: int) -> void:
 	%Killed.text = str(count)
 
 func update_compass_direction(direction: Vector2, distance: float):
-	var direction_degrees = rad_to_deg(direction.angle())
 	%CompasArrow.rotation = direction.angle()
-	%Distance.text = str(round(distance))
+	%Distance.text = str(round(distance / distance_divider)) + " nm"
