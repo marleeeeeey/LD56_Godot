@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cni2bqqn0bf64"]
+
+[ext_resource type="Texture2D" uid="uid://bvr6ivcthwr8e" path="res://assets/images/baby_spider.png" id="1_ct5a3"]
+
+[node name="Child" type="CharacterBody2D"]
+
+[node name="baby" type="Sprite2D" parent="."]
+texture = ExtResource("1_ct5a3")

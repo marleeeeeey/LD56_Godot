@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://jmn2dfct3l71"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_itg2r"]
+[ext_resource type="Texture2D" uid="uid://8dyr3iwxqvaq" path="res://assets/images/bullet.png" id="1_p4mst"]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_itg2r")
+
+[node name="player2" type="Sprite2D" parent="."]
+rotation = -2.24624
+texture = ExtResource("1_p4mst")
+offset = Vector2(-0.311325, 5.86063)
