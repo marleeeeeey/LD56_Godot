@@ -11,24 +11,34 @@ var target_position := Vector2.ZERO
 var click_times = []
 var max_click_age = 1.0
 
+
 func _ready():
 	GameManager.set_player(self)
 
 func _input(event):
-	var has_mouse_or_touch_input = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or event is InputEventScreenTouch
-	
-	if has_mouse_or_touch_input:
-		var mouse_pos = get_global_mouse_position()
-		print("set target position to ", mouse_pos)
-		print("my position is ", global_position)
-		print("distance to target is ", global_position.distance_to(mouse_pos))
-		target_position = mouse_pos
+	var is_mouse_event = event is InputEventMouseButton
+	var is_touch_event = event is InputEventScreenTouch
+	var is_left_click = is_mouse_event and event.button_index == MOUSE_BUTTON_LEFT
+
+	if is_left_click:
 		click_times.append(Time.get_ticks_msec() / 1000.0)
+
+	var is_mouse_button_pressed = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+
+	if is_mouse_button_pressed or is_touch_event:
+		var mouse_pos = get_global_mouse_position()
+		# print("set target position to ", mouse_pos)
+		# print("my position is ", global_position)
+		# print("distance to target is ", global_position.distance_to(mouse_pos))
+		target_position = mouse_pos
+
 
 func _physics_process(_delta: float) -> void:
 	var current_time = Time.get_ticks_msec() / 1000.0
 	click_times = click_times.filter(func(t): return current_time - t <= max_click_age)
 	var boost_from_click = 1 + boost * click_times.size()
+
+	print("boost from click is ", boost_from_click)
 
 	if target_position != Vector2.ZERO:
 		# print("target position is ", target_position)
