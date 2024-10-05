@@ -10,15 +10,15 @@ size = Vector2(56.5671, 23.6227)
 script = ExtResource("1_rcb2c")
 speed = 500.0
 
+[node name="Sun" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+texture = ExtResource("3_whst5")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
-
-[node name="Sun" type="Sprite2D" parent="Area2D"]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.501961)
-texture = ExtResource("3_whst5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1.66949, 4.98206)
