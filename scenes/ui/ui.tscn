@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
-[ext_resource type="Texture2D" uid="uid://c2hr6ooaap2jr" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
-[ext_resource type="Texture2D" uid="uid://cp346ygd7omlr" path="res://assets/images/lupa_handle.png" id="3_4b3nu"]
+[ext_resource type="Texture2D" uid="uid://c2f8b48m3sgde" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
+[ext_resource type="Texture2D" uid="uid://cb2a7fngk8cyu" path="res://assets/images/lupa_handle.png" id="3_4b3nu"]
 [ext_resource type="Texture2D" uid="uid://y0uyblo07kjb" path="res://assets/images/lazer.png" id="4_ir5b0"]
 [ext_resource type="LabelSettings" uid="uid://cnh84tkbf88o0" path="res://scenes/ui/ui_label.tres" id="5_5fjyf"]
 [ext_resource type="Texture2D" uid="uid://celmimphh8aqv" path="res://assets/images/case.png" id="5_jtvnq"]
-[ext_resource type="Texture2D" uid="uid://btf4qcpasf5jq" path="res://assets/images/arrow.png" id="6_r1cff"]
+[ext_resource type="Texture2D" uid="uid://juvb6jaji5fo" path="res://assets/images/arrow.png" id="6_r1cff"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ufnug"]
 font_size = 64

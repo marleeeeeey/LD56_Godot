@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7fhl0sjy2dtb"]
+[gd_scene load_steps=2 format=3 uid="uid://b7fhl0sjy2dtb"]
 
 [ext_resource type="Script" path="res://scenes/cloud/cloud.gd" id="1_cloud"]
-[ext_resource type="Texture2D" uid="uid://un6nas35pdxs" path="res://assets/images/sun_burn.png" id="2_ed286"]
 
 [node name="Cloud" type="Node2D"]
 z_index = 2
@@ -10,7 +9,6 @@ script = ExtResource("1_cloud")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0.768627, 0, 1)
 scale = Vector2(10, 10)
-texture = ExtResource("2_ed286")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
