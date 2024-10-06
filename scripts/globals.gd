@@ -97,3 +97,20 @@ func get_closest_node(global_pos: Vector2, nodes: Array[Node]) -> Node:
 
 func get_closest_node_by_group_name(global_pos: Vector2, group_name: String) -> Node:
 	return get_closest_node(global_pos, get_tree().get_nodes_in_group(group_name))
+
+
+func move_towards(this: Node2D, length: float) -> void:
+	this.position += this.transform.x * length
+	this.move_and_slide()
+
+
+func move_towards_position(this: Node2D, pos: Vector2, speed: float) -> void:
+	this.look_at(pos)
+	var diff = pos - this.global_position
+	move_towards_direction(this, diff, speed)
+
+
+func move_towards_direction(this: Node2D, direction: Vector2, speed: float) -> void:
+	direction = direction.normalized()
+	this.velocity = direction * speed
+	this.move_and_slide()

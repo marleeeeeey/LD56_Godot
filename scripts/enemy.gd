@@ -3,7 +3,7 @@ extends CharacterBody2D
 # Enemy
 # +-- Sprite2D
 # +-- Marker2D - is needed for attaching victims.
-# +-- Area2D	 - for catching notifications (Enemy listen other bodies entered).
+# +-- Area2D	 - for catching notifications (Enemy listen other bodies entered: my_target_catched_by_someone).
 # +-- CollisionShape2D - need this because we want to sent body to on_return_to_base_area callback.
 class_name Enemy
 
@@ -14,7 +14,7 @@ var target: Child
 var catched_target: Child
 var speed = 100
 var spawn_pos: Vector2
-var base_area: Area2D # should be set outside
+var base_area: Area2D  # should be set outside
 
 
 func _ready() -> void:
@@ -41,17 +41,9 @@ func _physics_process(delta: float) -> void:
 		if target.is_catched:
 			target = null  # stop forward to this item because it already catched
 		else:
-			move_towars(target.global_position, delta)
+			Globals.move_towards_position(self, target.global_position, speed)
 	else:
-		move_towars(spawn_pos, delta)
-
-
-func move_towars(pos: Vector2, delta: float) -> void:
-	look_at(pos)
-	var diff = pos - global_position
-	var direction = diff.normalized()
-	velocity = direction * speed
-	move_and_slide()
+		Globals.move_towards_position(self, spawn_pos, speed)
 
 
 func on_body_entered(body: Child) -> void:
@@ -74,13 +66,15 @@ func my_target_catched_by_someone(other: Enemy):
 	#print("Someone catch this child. It is not actual for me anymore.")
 	target.on_catch_by.disconnect(my_target_catched_by_someone)
 	target = null
-	
+
+
 func on_return_to_base_area(other: Enemy):
 	if target == null and other == self:
 		#print("Return to base area")
 		# TODO0: Decrease scope
 		queue_free()
-	
+
+
 func set_base_area(area: Area2D):
 	base_area = area
 	base_area.body_entered.connect(on_return_to_base_area)

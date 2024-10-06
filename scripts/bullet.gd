@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 class_name Bullet
 
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
-	position += transform.x * speed * delta
+	Globals.move_towards(self, speed * delta)
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -26,6 +26,7 @@ func _on_dead_timer_timeout() -> void:
 	if Globals.IS_DEBUG:
 		print("[Bullet._on_dead_timer_timeout()] ", self.name)
 	queue_free()
+
 
 func _on_object_destroyed():
 	if Globals.IS_DEBUG:
