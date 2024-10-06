@@ -9,11 +9,13 @@ const fire_scene := preload("res://scenes/fire/fire.tscn")
 const death_sound := preload("res://assets/sfx/explosion.wav")
 const burn_texture := preload("res://assets/images/burn_enemy.png")
 
-@export var speed := 650
+@export var speed := 580
+@export var walk_speed := 100
 @export var run_away_distance := 450
-@export var run_away_safe_distance := 800
+@export var run_away_safe_distance := 2000
 @export var super_power_cooldown := 3
 @export var trails_cooldown := 0.2
+@export var trails_life_time := 90
 
 @onready var sprite := %Sprite
 
@@ -23,10 +25,11 @@ var trails_timer: Timer
 
 enum State {
 	IDLE,
+	WALK,
 	RUN_AWAY,
 	DEAD
 }
-var current_state: State = State.IDLE
+var current_state: State = State.WALK
 var run_away_time: float = 0.0
 var is_first_super_power: bool = true
 
@@ -56,10 +59,10 @@ func _physics_process(delta: float) -> void:
 func use_super_power():
 	pass
 
-func process_logic(_delta: float):
+func process_additional_logic(_delta: float):
 	pass
 
-func update_state(_delta: float):
+func update_additional_state(_delta: float):
 	pass
 
 func die():
@@ -85,11 +88,11 @@ func _update_common_state(_delta: float):
 		return
 
 	if current_state == State.RUN_AWAY and _is_safe_distance_from_player():
-		current_state = State.IDLE
+		current_state = State.WALK
 		trails_timer.stop()
 		super_power_timer.stop()
 
-	if current_state == State.IDLE and _is_near_player():
+	if current_state == State.WALK and _is_near_player():
 		current_state = State.RUN_AWAY
 		trails_timer.start()
 		super_power_timer.start()
@@ -97,7 +100,7 @@ func _update_common_state(_delta: float):
 	if current_state == State.RUN_AWAY:
 		run_away_time += _delta
 
-	update_state(_delta)
+	update_additional_state(_delta)
 
 func _process_common_logic(delta: float):
 	if current_state == State.DEAD:
@@ -106,11 +109,17 @@ func _process_common_logic(delta: float):
 	if current_state == State.IDLE:
 		velocity = Vector2.ZERO
 
+	if current_state == State.WALK:
+		velocity = _get_direction_to_player() * walk_speed
+
 	if current_state == State.RUN_AWAY:
 		run_away_time += delta
+		velocity = _get_direction_away_from_player() * speed
 
-	process_logic(delta)
+	process_additional_logic(delta)
+	
 	_update_sprite_direction()
+	move_and_slide()
 
 func _is_safe_distance_from_player() -> bool:
 	var player_position := GameManager.get_player_position()
@@ -124,16 +133,21 @@ func _get_direction_away_from_player() -> Vector2:
 	var player_position := GameManager.get_player_position()
 	return (global_position - player_position).normalized()
 
+func _get_direction_to_player() -> Vector2:
+	var player_position := GameManager.get_player_position()
+	return (player_position - global_position).normalized()
+
 func _spawn_trail():
 	var trail = trail_scene.instantiate()
 	trail.texture = footsteps_texture
-	trail.max_life_time = 60.0
+	trail.max_life_time = trails_life_time
+	trail.opacity_multiplier = 1
 	trail.global_position = global_position
 	trail.rotation = velocity.angle()
 	GameManager.spawn_scene(trail)
 
 func _on_trails_timer_timeout() -> void:
-	if current_state == State.RUN_AWAY:
+	if current_state == State.RUN_AWAY or current_state == State.WALK:
 		_spawn_trail()
 
 func _update_sprite_direction():

@@ -31,7 +31,7 @@ var max_click_age = 1.0
 
 const game_field_size: Vector2 = Vector2(-4096, 4096)
 const lupa_field_size: Vector2 = Vector2(-500, 500)
-const lazer_point_safe_distance: float = 150
+const lazer_point_safe_distance: float = 200
 
 enum GameState {
 	RUNNING,
@@ -196,10 +196,9 @@ func _spawn_bug(bug_scene: PackedScene) -> void:
 func _spawn_idle_bugs() -> void:
 	for i in range(idle_bug_count):
 		var bug: BaseBug = simple_bug_scene.instantiate()
+		bug.run_away_distance = 300
+		bug.run_away_safe_distance = 500
 		bug.position = _get_bug_random_position_inside_lupa()
-		bug.current_state = BaseBug.State.IDLE
-		bug.run_away_distance = 0
-		bug.super_power_cooldown = 1000
 		bugs.append(bug)
 		spawn_scene(bug)
 

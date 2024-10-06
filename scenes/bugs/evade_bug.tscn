@@ -16,8 +16,6 @@ script = ExtResource("1_nfq6w")
 evade_max_time = 0.2
 evade_speed = 1800
 speed = 660
-run_away_distance = 350
-run_away_safe_distance = 1000
 super_power_cooldown = 4
 
 [node name="Sprite" type="Sprite2D" parent="."]

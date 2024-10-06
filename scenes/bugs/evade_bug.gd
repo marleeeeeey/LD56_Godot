@@ -8,7 +8,7 @@ class_name EvadeBug
 var is_evading = false
 var evade_time = 0.0
 
-func process_logic(_delta: float):
+func process_additional_logic(_delta: float):
 	if !is_running_away():
 		return
 
@@ -21,7 +21,7 @@ func process_logic(_delta: float):
 
 	move_and_slide()
 
-func update_state(_delta: float):
+func update_additional_state(_delta: float):
 	if !is_evading:
 		return
 
