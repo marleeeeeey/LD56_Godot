@@ -29,21 +29,21 @@ render_target_update_mode = 4
 zoom = Vector2(0.1, 0.1)
 
 [node name="LupaContainer" type="SubViewportContainer" parent="."]
-offset_left = 454.0
-offset_top = 89.0
-offset_right = 1478.0
-offset_bottom = 985.0
+offset_left = 487.0
+offset_top = 161.0
+offset_right = 1387.0
+offset_bottom = 944.0
 
 [node name="LupaViewport" type="SubViewport" parent="LupaContainer"]
 unique_name_in_owner = true
 handle_input_locally = false
-size = Vector2i(1024, 896)
+size = Vector2i(900, 750)
 render_target_update_mode = 4
 
 [node name="TileMapLayer" parent="LupaContainer/LupaViewport" instance=ExtResource("4_o7qia")]
 
+[node name="Node2D" type="Node2D" parent="LupaContainer/LupaViewport"]
+
 [node name="Player" parent="LupaContainer/LupaViewport" instance=ExtResource("3_8oqao")]
 
 [node name="Camera2D" type="Camera2D" parent="LupaContainer/LupaViewport/Player"]
-
-[node name="Node2D" type="Node2D" parent="LupaContainer/LupaViewport"]

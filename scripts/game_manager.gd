@@ -8,7 +8,7 @@ const simple_bug_count: int = 10
 const evade_bug_count: int = 10
 const poison_bug_count: int = 10
 
-const click_boost_multiplier := 0.05
+const click_boost_multiplier := 0.02
 
 const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 const closest_bug_update_time = 0.3

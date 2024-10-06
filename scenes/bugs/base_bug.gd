@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name BaseBug
 
+const footsteps_texture := preload("res://assets/images/trails.png")
+
 const trail_scene := preload("res://scenes/trail/trail.tscn")
 const fire_scene := preload("res://scenes/fire/fire.tscn")
 const death_sound := preload("res://assets/sfx/explosion.wav")
@@ -124,6 +126,8 @@ func _get_direction_away_from_player() -> Vector2:
 
 func _spawn_trail():
 	var trail = trail_scene.instantiate()
+	trail.texture = footsteps_texture
+	trail.max_life_time = 60.0
 	trail.global_position = global_position
 	trail.rotation = velocity.angle()
 	GameManager.spawn_scene(trail)
