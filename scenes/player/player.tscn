@@ -7,7 +7,7 @@
 size = Vector2(95, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adgj4"]
-size = Vector2(68.3895, 26.0845)
+size = Vector2(39.2876, 15.3609)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
@@ -28,6 +28,7 @@ modulate = Color(1, 1, 1, 0.776471)
 texture = ExtResource("2_op4md")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 0.999998)
 scale = Vector2(1.37448, 3.45032)
 shape = SubResource("RectangleShape2D_adgj4")
 debug_color = Color(0.944459, 0.0496161, 0.573423, 0.42)

@@ -4,9 +4,9 @@ const simple_bug_scene = preload("res://scenes/bugs/simple_bug.tscn")
 const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
 const poison_bug_scene = preload("res://scenes/bugs/poison_bug.tscn")
 
-const idle_bug_count: int = 3
-const simple_bug_count: int = 20
-const evade_bug_count: int = 10
+const idle_bug_count: int = 5
+const simple_bug_count: int = 10
+const evade_bug_count: int = 5
 const poison_bug_count: int = 10
 const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 
@@ -31,7 +31,7 @@ var max_click_age = 1.0
 
 const game_field_size: Vector2 = Vector2(-4096, 4096)
 const lupa_field_size: Vector2 = Vector2(-500, 500)
-const lazer_point_safe_distance: float = 200
+const lazer_point_safe_distance: float = 100
 
 enum GameState {
 	RUNNING,
@@ -196,11 +196,12 @@ func _spawn_bug(bug_scene: PackedScene) -> void:
 func _spawn_idle_bugs() -> void:
 	for i in range(idle_bug_count):
 		var bug: BaseBug = simple_bug_scene.instantiate()
-		bug.run_away_distance = 300
-		bug.run_away_safe_distance = 500
-		bug.position = _get_bug_random_position_inside_lupa()
 		bugs.append(bug)
+		bug.position = _get_bug_random_position_inside_lupa()
 		spawn_scene(bug)
+		bug.walk_speed = 100
+		bug.run_away_distance = 0
+
 
 func _get_bug_random_position() -> Vector2:
 	return Vector2(randf_range(game_field_size.x, game_field_size.y), randf_range(game_field_size.x, game_field_size.y))
@@ -209,7 +210,7 @@ func _get_bug_random_position_inside_lupa() -> Vector2:
 	var random_point = Vector2(randf_range(lupa_field_size.x, lupa_field_size.y), randf_range(lupa_field_size.x, lupa_field_size.y))
 
 	# dont spawn bugs in lazer point
-	while random_point.distance_to(Vector2.ZERO) < lazer_point_safe_distance:
+	while abs(random_point.distance_to(Vector2.ZERO)) < lazer_point_safe_distance:
 		random_point = Vector2(randf_range(lupa_field_size.x, lupa_field_size.y), randf_range(lupa_field_size.x, lupa_field_size.y))
 
 	return random_point

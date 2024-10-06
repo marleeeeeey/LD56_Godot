@@ -3,23 +3,16 @@ extends BaseBug
 class_name EvadeBug
 
 @export var evade_max_time = 3.0
-@export var evade_speed = 800
+@export var evade_speed = 450
 
 var is_evading = false
 var evade_time = 0.0
 
 func process_additional_logic(_delta: float):
-	if !is_running_away():
-		return
-
-	var direction = _get_direction_away_from_player()
-
 	if is_evading:
+		var direction = _get_direction_away_from_player()
 		velocity = direction * evade_speed
-	else:
-		velocity = direction * speed
 
-	move_and_slide()
 
 func update_additional_state(_delta: float):
 	if !is_evading:
