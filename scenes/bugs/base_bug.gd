@@ -14,8 +14,8 @@ const burn_texture := preload("res://assets/images/burn_enemy.png")
 @export var run_away_distance := 450
 @export var run_away_safe_distance := 1000
 @export var super_power_cooldown := 3
-@export var trails_cooldown := 0.2
-@export var trails_life_time := 120
+@export var trails_cooldown := 0.4
+@export var trails_life_time := 10
 @export var max_distance_from_player := 2000
 @export var random_direction_change_time := 2
 
@@ -158,7 +158,6 @@ func _spawn_trail():
 	var trail = trail_scene.instantiate()
 	trail.texture = footsteps_texture
 	trail.max_life_time = trails_life_time
-	trail.opacity_multiplier = 1
 	trail.global_position = global_position
 	trail.rotation = velocity.angle()
 	GameManager.spawn_scene(trail)

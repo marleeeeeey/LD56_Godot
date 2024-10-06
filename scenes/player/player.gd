@@ -5,7 +5,7 @@ class_name Player
 const trail_scene := preload("res://scenes/trail/trail.tscn")
 const lazer_burn_texture := preload("res://assets/images/lazer_burn.png")
 
-@export var speed := 300.0
+@export var speed := 700.0
 
 var target_position := Vector2.ZERO
 
@@ -38,5 +38,5 @@ func spawn_lazer_burn_effect() -> void:
 	var trail: Trail = trail_scene.instantiate()
 	trail.position = global_position
 	trail.texture = lazer_burn_texture
-	trail.max_life_time = 10
+	trail.max_life_time = 5
 	GameManager.spawn_scene(trail)
