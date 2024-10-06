@@ -4,9 +4,9 @@ const simple_bug_scene = preload("res://scenes/bugs/simple_bug.tscn")
 const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
 const poison_bug_scene = preload("res://scenes/bugs/poison_bug.tscn")
 
-const simple_bug_count: int = 10
-const evade_bug_count: int = 10
-const poison_bug_count: int = 10
+const simple_bug_count: int = 50
+const evade_bug_count: int = 30
+const poison_bug_count: int = 30
 
 const click_boost_multiplier := 0.02
 
