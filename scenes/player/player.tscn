@@ -1,18 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsatfmcapefva"]
+[gd_scene load_steps=5 format=3 uid="uid://dsatfmcapefva"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_rcb2c"]
 [ext_resource type="Texture2D" uid="uid://e62u7eodsuge" path="res://assets/images/lazer_point.png" id="2_op4md"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6s6ov"]
+size = Vector2(95, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adgj4"]
 size = Vector2(68.3895, 26.0845)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
+collision_mask = 4
 script = ExtResource("1_rcb2c")
 speed = 700.0
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_6s6ov")
+
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 10
 
 [node name="LazerPoint" type="Sprite2D" parent="Area2D"]
 unique_name_in_owner = true
@@ -22,6 +30,7 @@ texture = ExtResource("2_op4md")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(1.37448, 3.45032)
 shape = SubResource("RectangleShape2D_adgj4")
+debug_color = Color(0.944459, 0.0496161, 0.573423, 0.42)
 
 [node name="LazerBurnTrailTimer" type="Timer" parent="."]
 wait_time = 0.1
