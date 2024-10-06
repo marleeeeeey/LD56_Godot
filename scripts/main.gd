@@ -8,6 +8,8 @@ var child_location_factory: RandomLocationFactory
 var child_scene: PackedScene = preload("res://scenes/child.tscn")
 
 @onready var enemies_base_area_2d: Area2D = $EnemiesBaseArea2D
+@onready var child_base_area_2d: Area2D = $ChildBaseArea2D
+
 
 func _ready() -> void:
 	enemy_location_factory = $EnemyLocationFactory
@@ -15,9 +17,10 @@ func _ready() -> void:
 	child_location_factory = $ChildLocationFactory
 
 	# create several children
-	for i in range(10):
+	for i in range(5):
 		var pos = child_location_factory.get_random_location()
-		Globals.create_on_parent(self, pos, child_scene)
+		var child: Child = Globals.create_on_parent(self, pos, child_scene)
+		child.set_base_area(child_base_area_2d)
 
 
 func on_emeny_spawn_timeout() -> void:

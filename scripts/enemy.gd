@@ -63,9 +63,10 @@ func my_target_catched_by_someone(other: Enemy):
 	if other == self:
 		return
 
-	#print("Someone catch this child. It is not actual for me anymore.")
-	target.on_catch_by.disconnect(my_target_catched_by_someone)
-	target = null
+	if target:
+		#print("Someone catch this child. It is not actual for me anymore.")
+		target.on_catch_by.disconnect(my_target_catched_by_someone)
+		target = null
 
 
 func on_return_to_base_area(other: Enemy):

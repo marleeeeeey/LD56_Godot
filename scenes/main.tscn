@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=9 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5cts8"]
 [ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_3hpfe"]
@@ -19,6 +19,10 @@ point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohxrq"]
 size = Vector2(3332, 405)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n475f"]
+radius = 187.0
+height = 1460.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5cts8")
@@ -50,3 +54,10 @@ curve = SubResource("Curve2D_bduhs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesBaseArea2D"]
 position = Vector2(994, -223)
 shape = SubResource("RectangleShape2D_ohxrq")
+
+[node name="ChildBaseArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChildBaseArea2D"]
+position = Vector2(979, 825)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n475f")

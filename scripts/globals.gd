@@ -114,3 +114,18 @@ func move_towards_direction(this: Node2D, direction: Vector2, speed: float) -> v
 	direction = direction.normalized()
 	this.velocity = direction * speed
 	this.move_and_slide()
+
+
+# Interpolation is used if you set rotation_speed not zero.
+func move_towards_direction_with_angle_interpolation(
+	this: Node2D, direction: Vector2, speed: float, rotation_speed: float
+) -> void:
+	var target_angle = this.global_position.angle_to_point(this.global_position + direction)
+	this.rotation = lerp_angle(this.rotation, target_angle, rotation_speed)
+	move_towards_direction(this, direction, speed)
+
+
+func get_random_near_value(value: float, variance: float = 0.25) -> float:
+	var rand_value = randf_range(value * (1 - variance / 2), value * (1 + variance / 2))
+	print(rand_value)
+	return rand_value
