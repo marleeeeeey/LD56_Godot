@@ -2,20 +2,25 @@ extends Node2D
 
 class_name Trail
 
-@onready var sprite := $Sprite2D
+@export var texture: Texture2D
+@export var max_life_time := 3.0
 
-var fade_time := 0.0
-var max_fade_time := 3.0
+@onready var sprite: Sprite2D = $Sprite2D
+
+const update_time = 0.1
+var life_time := 0.0
 
 func _ready() -> void:
-    pass
+	sprite.texture = texture
+	$Timer.wait_time = life_time
+	$Timer.start()
 
 func _on_timer_timeout() -> void:
-    fade_time += 1
-    update_opacity()
+	life_time += 1
+	update_opacity()
 
-    if fade_time >= max_fade_time:
-        queue_free()
+	if life_time >= max_life_time:
+		queue_free()
 
 func update_opacity():
-    sprite.modulate.a = 1.0 - (fade_time / max_fade_time)
+	sprite.modulate.a = 1.0 - (life_time / max_life_time)

@@ -23,6 +23,9 @@ texture = ExtResource("2_op4md")
 scale = Vector2(1.37448, 3.45032)
 shape = SubResource("RectangleShape2D_adgj4")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="LazerBurnTrailTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_bug_hit"]
+[connection signal="timeout" from="LazerBurnTrailTimer" to="." method="spawn_lazer_burn_effect"]

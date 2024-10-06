@@ -65,9 +65,9 @@ render_target_update_mode = 4
 zoom = Vector2(0.5, 0.5)
 
 [node name="LupaContainer" type="SubViewportContainer" parent="."]
-offset_left = 483.0
+offset_left = 454.0
 offset_top = 89.0
-offset_right = 1507.0
+offset_right = 1478.0
 offset_bottom = 985.0
 
 [node name="LupaViewport" type="SubViewport" parent="LupaContainer"]
