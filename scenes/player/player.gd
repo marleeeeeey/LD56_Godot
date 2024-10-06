@@ -29,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 
 func set_target_position(_target: Vector2) -> void:
 	target_position = _target
-	
+
 func _on_bug_hit(body: Node2D) -> void:
 	if body is BaseBug:
 		GameManager.handle_bug_hit(body)

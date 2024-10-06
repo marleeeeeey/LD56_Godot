@@ -74,6 +74,7 @@ func _ready():
 	timer.timeout.connect(_update_closest_bug_direction)
 	add_child(timer)
 
+	
 func is_game_running() -> bool:
 	return game_state == GameState.RUNNING
 

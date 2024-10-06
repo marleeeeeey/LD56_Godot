@@ -15,7 +15,7 @@ const burn_texture := preload("res://assets/images/burn_enemy.png")
 
 @onready var sprite := %Sprite
 
-var death_sound_player: AudioStreamPlayer2D
+var death_sound_player: AudioStreamPlayer
 var super_power_timer: Timer
 var trails_timer: Timer
 
@@ -29,7 +29,7 @@ var run_away_time: float = 0.0
 var is_first_super_power: bool = true
 
 func _ready():
-	death_sound_player = AudioStreamPlayer2D.new()
+	death_sound_player = AudioStreamPlayer.new()
 	death_sound_player.stream = death_sound
 	add_child(death_sound_player)
 

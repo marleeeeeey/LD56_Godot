@@ -12,7 +12,7 @@ var life_time := 0.0
 
 func _ready() -> void:
 	sprite.texture = texture
-	$Timer.wait_time = max_life_time
+	$Timer.wait_time = update_time
 	$Timer.start()
 
 func _on_timer_timeout() -> void:
