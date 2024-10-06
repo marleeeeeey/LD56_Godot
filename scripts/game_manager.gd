@@ -2,11 +2,13 @@ extends Node
 
 const simple_bug_scene = preload("res://scenes/bugs/simple_bug.tscn")
 const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
+const poison_bug_scene = preload("res://scenes/bugs/poison_bug.tscn")
 
-const simple_bug_count: int = 20
+const simple_bug_count: int = 10
 const evade_bug_count: int = 10
+const poison_bug_count: int = 10
 
-const max_bugs_count: int = simple_bug_count + evade_bug_count
+const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 const closest_bug_update_time = 0.3
 
 var game_data: GameData
@@ -136,6 +138,9 @@ func _spawn_bugs() -> void:
 
 	for i in range(evade_bug_count):
 		_spawn_bug(evade_bug_scene)
+
+	for i in range(poison_bug_count):
+		_spawn_bug(poison_bug_scene)
 
 func _spawn_bug(bug_scene: PackedScene) -> void:
 	var bug = bug_scene.instantiate()

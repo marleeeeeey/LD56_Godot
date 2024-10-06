@@ -7,11 +7,11 @@ const fire_scene := preload("res://scenes/fire/fire.tscn")
 const death_sound := preload("res://assets/sfx/explosion.wav")
 const burn_texture := preload("res://assets/images/burn_enemy.png")
 
-@export var speed := 100
-@export var run_away_distance := 100
-@export var run_away_safe_distance := 50
-@export var super_power_cooldown := 10.0
-@export var trails_cooldown := 0.1
+@export var speed := 650
+@export var run_away_distance := 450
+@export var run_away_safe_distance := 800
+@export var super_power_cooldown := 3
+@export var trails_cooldown := 0.2
 
 @onready var sprite := %Sprite
 
@@ -139,4 +139,7 @@ func _update_sprite_direction():
 		sprite.flip_h = false
 
 func _on_super_power_timer_timeout():
+	if is_dead():
+		return
+
 	use_super_power()

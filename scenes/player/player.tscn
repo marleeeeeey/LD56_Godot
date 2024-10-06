@@ -8,7 +8,7 @@ size = Vector2(56.5671, 23.6227)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rcb2c")
-speed = 600.0
+speed = 700.0
 boost = 0.02
 
 [node name="Sun" type="Sprite2D" parent="."]
