@@ -4,13 +4,14 @@ const simple_bug_scene = preload("res://scenes/bugs/simple_bug.tscn")
 const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
 const poison_bug_scene = preload("res://scenes/bugs/poison_bug.tscn")
 
-const simple_bug_count: int = 50
-const evade_bug_count: int = 30
-const poison_bug_count: int = 30
+const idle_bug_count: int = 3
+const simple_bug_count: int = 20
+const evade_bug_count: int = 10
+const poison_bug_count: int = 10
+const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 
 const click_boost_multiplier := 0.02
 
-const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 const closest_bug_update_time = 0.3
 
 var game_data: GameData
@@ -23,13 +24,14 @@ var closest_bug: BaseBug = null
 var closest_bug_direction: Vector2 = Vector2.ZERO
 var closest_bug_distance: float = INF
 
-var current_bugs_count: int = max_bugs_count
 var killed_bugs_count: int = 0
 
 var click_times = []
 var max_click_age = 1.0
 
 const game_field_size: Vector2 = Vector2(-4096, 4096)
+const lupa_field_size: Vector2 = Vector2(-500, 500)
+const lazer_point_safe_distance: float = 150
 
 enum GameState {
 	RUNNING,
@@ -102,23 +104,23 @@ func get_distance_to_player(bug: BaseBug) -> float:
 	var bug_position := bug.global_position
 	return player_position.distance_to(bug_position)
 
+func get_bugs_count() -> int:
+	return bugs.size()
+
 func handle_bug_hit(bug: BaseBug) -> void:
 	bug.die()
 
-	current_bugs_count -= 1
+	bugs = bugs.filter(func(b): return !b.is_dead())
 	killed_bugs_count += 1
-	bugs_count_changed.emit(current_bugs_count)
+	bugs_count_changed.emit(get_bugs_count())
 	killed_bugs_count_changed.emit(killed_bugs_count)
 
-	if current_bugs_count == 0:
+	if get_bugs_count() == 0:
 		_set_game_state(GameState.WON)
 	else:
 		closest_bug = _get_closest_bug()
 
 func reset_game() -> void:
-	current_bugs_count = max_bugs_count
-	killed_bugs_count = 0
-
 	bugs.clear()
 	_spawn_bugs()
 	closest_bug = _get_closest_bug()
@@ -174,6 +176,8 @@ func _load_game():
 	game_analytic = GameAnalytic.load()
 
 func _spawn_bugs() -> void:
+	_spawn_idle_bugs()
+
 	for i in range(simple_bug_count):
 		_spawn_bug(simple_bug_scene)
 
@@ -189,5 +193,24 @@ func _spawn_bug(bug_scene: PackedScene) -> void:
 	bugs.append(bug)
 	spawn_scene(bug)
 
+func _spawn_idle_bugs() -> void:
+	for i in range(idle_bug_count):
+		var bug: BaseBug = simple_bug_scene.instantiate()
+		bug.position = _get_bug_random_position_inside_lupa()
+		bug.current_state = BaseBug.State.IDLE
+		bug.run_away_distance = 0
+		bug.super_power_cooldown = 1000
+		bugs.append(bug)
+		spawn_scene(bug)
+
 func _get_bug_random_position() -> Vector2:
 	return Vector2(randf_range(game_field_size.x, game_field_size.y), randf_range(game_field_size.x, game_field_size.y))
+
+func _get_bug_random_position_inside_lupa() -> Vector2:
+	var random_point = Vector2(randf_range(lupa_field_size.x, lupa_field_size.y), randf_range(lupa_field_size.x, lupa_field_size.y))
+
+	# dont spawn bugs in lazer point
+	while random_point.distance_to(Vector2.ZERO) < lazer_point_safe_distance:
+		random_point = Vector2(randf_range(lupa_field_size.x, lupa_field_size.y), randf_range(lupa_field_size.x, lupa_field_size.y))
+
+	return random_point
