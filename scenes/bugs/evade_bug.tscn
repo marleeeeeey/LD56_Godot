@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cro4mv4dibaj7"]
+
+[ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="1_0wudf"]
+[ext_resource type="Script" path="res://scenes/bugs/evade_bug.gd" id="1_nfq6w"]
+[ext_resource type="AudioStream" uid="uid://bsinwb1r1bn3r" path="res://assets/sfx/explosion.wav" id="3_wl813"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcdm"]
+size = Vector2(302, 228)
+
+[node name="EvadeBug" type="CharacterBody2D"]
+modulate = Color(1, 0.258824, 0, 1)
+z_index = 1
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_nfq6w")
+evade_max_time = 5.0
+evade_speed = 600
+speed = 450
+run_away_distance = 500
+run_away_safe_distance = 700
+super_power_cooldown = 5.0
+trails_cooldown = 0.2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_0wudf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 11)
+shape = SubResource("RectangleShape2D_0dcdm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wl813")
+volume_db = -4.952
+
+[node name="TrailsTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="TrailsTimer" to="." method="_on_trails_timer_timeout"]

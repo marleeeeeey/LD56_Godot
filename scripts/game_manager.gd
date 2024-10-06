@@ -1,14 +1,20 @@
 extends Node
 
-const max_bugs_count: int = 30
+const simple_bug_scene = preload("res://scenes/bugs/simple_bug.tscn")
+const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
+
+const simple_bug_count: int = 20
+const evade_bug_count: int = 10
+
+const max_bugs_count: int = simple_bug_count + evade_bug_count
 const closest_bug_update_time = 0.3
 
 var game_data: GameData
 var game_analytic: GameAnalytic
 
 var player: Player
-var bugs: Array[DustMite] = []
-var closest_bug: DustMite = null
+var bugs: Array[BaseBug] = []
+var closest_bug: BaseBug = null
 var closest_bug_direction: Vector2 = Vector2.ZERO
 var closest_bug_distance: float = INF
 
@@ -31,7 +37,6 @@ signal closest_bug_info_changed(direction: Vector2, distance: float)
 
 func _ready():
 	_load_game()
-	_spawn_bugs()
 
 	var timer = Timer.new()
 	timer.wait_time = closest_bug_update_time
@@ -44,18 +49,17 @@ func is_game_running() -> bool:
 
 func set_player(_player: Player) -> void:
 	player = _player
-	closest_bug = _get_closest_bug()
-	_update_closest_bug_direction()
+	reset_game()
 
 func get_player_position() -> Vector2:
 	return player.global_position
 
-func get_distance_to_player(bug: DustMite) -> float:
+func get_distance_to_player(bug: BaseBug) -> float:
 	var player_position := get_player_position()
 	var bug_position := bug.global_position
 	return player_position.distance_to(bug_position)
 
-func handle_bug_hit(bug: DustMite) -> void:
+func handle_bug_hit(bug: BaseBug) -> void:
 	bug.die()
 
 	current_bugs_count -= 1
@@ -78,8 +82,8 @@ func reset_game() -> void:
 
 	_set_game_state(GameState.RUNNING)
 
-func _get_closest_bug() -> DustMite:
-	var _closest_bug: DustMite = null
+func _get_closest_bug() -> BaseBug:
+	var _closest_bug: BaseBug = null
 	var closest_distance: float = INF
 
 	var player_position := get_player_position()
@@ -127,12 +131,17 @@ func _load_game():
 	game_analytic = GameAnalytic.load()
 
 func _spawn_bugs() -> void:
-	# spawn bugs in game field
-	for i in range(max_bugs_count):
-		var bug = preload("res://scenes/dust_mite/dust_mite.tscn").instantiate()
-		bug.position = _get_bug_random_position()
-		bugs.append(bug)
-		add_child(bug)
+	for i in range(simple_bug_count):
+		_spawn_bug(simple_bug_scene)
+
+	for i in range(evade_bug_count):
+		_spawn_bug(evade_bug_scene)
+
+func _spawn_bug(bug_scene: PackedScene) -> void:
+	var bug = bug_scene.instantiate()
+	bug.position = _get_bug_random_position()
+	bugs.append(bug)
+	add_child(bug)
 
 func _get_bug_random_position() -> Vector2:
 	return Vector2(randf_range(game_field_size.x, game_field_size.y), randf_range(game_field_size.x, game_field_size.y))

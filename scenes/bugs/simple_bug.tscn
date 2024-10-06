@@ -1,26 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://cro4mv4dibaj7"]
+[gd_scene load_steps=5 format=3 uid="uid://dg525qaxc3vyn"]
 
 [ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="1_0wudf"]
-[ext_resource type="Script" path="res://scenes/dust_mite/dust_mite.gd" id="1_je4c8"]
-[ext_resource type="PackedScene" uid="uid://clkstxwcj84px" path="res://scenes/trail/trail.tscn" id="2_hby07"]
-[ext_resource type="PackedScene" uid="uid://bte53arl5phpx" path="res://scenes/fire/fire.tscn" id="3_v2m70"]
+[ext_resource type="Script" path="res://scenes/bugs/simple_bug.gd" id="1_us5nw"]
 [ext_resource type="AudioStream" uid="uid://bsinwb1r1bn3r" path="res://assets/sfx/explosion.wav" id="3_wl813"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcdm"]
 size = Vector2(302, 228)
 
-[node name="DustMite" type="CharacterBody2D"]
+[node name="SimpleBug" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_je4c8")
+script = ExtResource("1_us5nw")
 speed = 450
-run_away_distance = 450
-run_away_safe_distance = 900
-trail_scene = ExtResource("2_hby07")
-fire_scene = ExtResource("3_v2m70")
+run_away_distance = 500
+run_away_safe_distance = 700
+super_power_cooldown = 5.0
+trails_cooldown = 0.2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("1_0wudf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

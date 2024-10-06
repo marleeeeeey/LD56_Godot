@@ -57,5 +57,5 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 func _on_bug_hit(body: Node2D) -> void:
-	if body is DustMite:
+	if body is BaseBug:
 		GameManager.handle_bug_hit(body)
