@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=8 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
-[ext_resource type="Texture2D" uid="uid://vu6aoxptpuj3" path="res://assets/images/background.png" id="2_ov88f"]
-[ext_resource type="Texture2D" uid="uid://m6mf6oiyfyb0" path="res://assets/images/pillow.png" id="3_oabqm"]
-[ext_resource type="Texture2D" uid="uid://dah8ywfclv1to" path="res://assets/images/lupa.png" id="4_ecpml"]
+[ext_resource type="Texture2D" uid="uid://c2hr6ooaap2jr" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
+[ext_resource type="Texture2D" uid="uid://cp346ygd7omlr" path="res://assets/images/lupa_handle.png" id="3_4b3nu"]
 [ext_resource type="LabelSettings" uid="uid://cnh84tkbf88o0" path="res://scenes/ui/ui_label.tres" id="5_5fjyf"]
 [ext_resource type="Texture2D" uid="uid://celmimphh8aqv" path="res://assets/images/case.png" id="5_jtvnq"]
 [ext_resource type="Texture2D" uid="uid://btf4qcpasf5jq" path="res://assets/images/arrow.png" id="6_r1cff"]
@@ -17,22 +16,14 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_jxq7h")
 distance_divider = 150.0
 
-[node name="background" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_ov88f")
-centered = false
-
-[node name="pillow" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(27, 26)
-texture = ExtResource("3_oabqm")
-centered = false
-
 [node name="lupa" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(479, 103)
-texture = ExtResource("4_ecpml")
+position = Vector2(457, 89)
+texture = ExtResource("2_ren4m")
 centered = false
+
+[node name="handle" type="Sprite2D" parent="lupa"]
+position = Vector2(532, 1084)
+texture = ExtResource("3_4b3nu")
 
 [node name="CompasCase" type="Sprite2D" parent="."]
 position = Vector2(238, 847)
@@ -101,6 +92,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Win" type="PanelContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

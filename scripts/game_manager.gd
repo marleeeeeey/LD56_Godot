@@ -8,7 +8,7 @@ const simple_bug_count: int = 10
 const evade_bug_count: int = 10
 const poison_bug_count: int = 10
 
-const click_boost_multiplier := 0.1
+const click_boost_multiplier := 0.05
 
 const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 const closest_bug_update_time = 0.3
@@ -58,10 +58,11 @@ func _input(event: InputEvent) -> void:
 
 	if is_mouse_button_pressed or is_touch_event:
 		var mouse_pos = player.get_global_mouse_position()
-		print("set target position to ", mouse_pos)
-		print("my position is ", player.global_position)
-		print("distance to target is ", player.global_position.distance_to(mouse_pos))
 		player.set_target_position(mouse_pos)
+
+		# print("set target position to ", mouse_pos)
+		# print("my position is ", player.global_position)
+		# print("distance to target is ", player.global_position.distance_to(mouse_pos))
 		
 		
 func _ready():
