@@ -7,6 +7,7 @@ var enemy_scene: PackedScene = preload("res://scenes/enemy.tscn")
 var child_location_factory: RandomLocationFactory
 var child_scene: PackedScene = preload("res://scenes/child.tscn")
 
+@onready var enemies_base_area_2d: Area2D = $EnemiesBaseArea2D
 
 func _ready() -> void:
 	enemy_location_factory = $EnemyLocationFactory
@@ -21,4 +22,5 @@ func _ready() -> void:
 
 func on_emeny_spawn_timeout() -> void:
 	var pos = enemy_location_factory.get_random_location()
-	Globals.create_in_global_pos(pos, enemy_scene)
+	var enemy: Enemy = Globals.create_in_global_pos(pos, enemy_scene)
+	enemy.set_base_area(enemies_base_area_2d)

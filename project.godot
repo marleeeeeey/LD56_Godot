@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 GameManager="*res://scripts/game_manager.gd"
 Globals="*res://scripts/globals.gd"
 
+[debug]
+
+gdscript/size/always_on_top=false
+
 [display]
 
 window/size/viewport_width=1920

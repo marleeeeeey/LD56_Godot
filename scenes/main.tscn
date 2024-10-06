@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=8 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5cts8"]
 [ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_3hpfe"]
@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_wjdjt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 101, 168, 0, 0, 0, 0, 1777, 179)
+"points": PackedVector2Array(0, 0, 0, 0, -607.191, 175.378, 0, 0, 0, 0, 2609.22, 175.542)
 }
 point_count = 2
 
@@ -16,6 +16,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 1661, 1055, 0, 0, 0, 0, 200, 659)
 }
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohxrq"]
+size = Vector2(3332, 405)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5cts8")
@@ -31,6 +34,8 @@ position = Vector2(1000, 733)
 path_2d = NodePath("Path2D")
 
 [node name="Path2D" type="Path2D" parent="EnemyLocationFactory"]
+position = Vector2(-10, -3394.1)
+scale = Vector2(1.00298, 18.2754)
 curve = SubResource("Curve2D_wjdjt")
 
 [node name="ChildLocationFactory" parent="." node_paths=PackedStringArray("path_2d") instance=ExtResource("7_0y746")]
@@ -39,3 +44,9 @@ use_bouding_rect = true
 
 [node name="Path2D" type="Path2D" parent="ChildLocationFactory"]
 curve = SubResource("Curve2D_bduhs")
+
+[node name="EnemiesBaseArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesBaseArea2D"]
+position = Vector2(994, -223)
+shape = SubResource("RectangleShape2D_ohxrq")
