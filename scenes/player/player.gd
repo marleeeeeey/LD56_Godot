@@ -3,7 +3,6 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed := 300.0
-@onready var sun := %Sun
 
 var target_position := Vector2.ZERO
 

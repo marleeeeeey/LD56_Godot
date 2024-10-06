@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=9 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
 [ext_resource type="Texture2D" uid="uid://c2hr6ooaap2jr" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
 [ext_resource type="Texture2D" uid="uid://cp346ygd7omlr" path="res://assets/images/lupa_handle.png" id="3_4b3nu"]
+[ext_resource type="Texture2D" uid="uid://y0uyblo07kjb" path="res://assets/images/lazer.png" id="4_ir5b0"]
 [ext_resource type="LabelSettings" uid="uid://cnh84tkbf88o0" path="res://scenes/ui/ui_label.tres" id="5_5fjyf"]
 [ext_resource type="Texture2D" uid="uid://celmimphh8aqv" path="res://assets/images/case.png" id="5_jtvnq"]
 [ext_resource type="Texture2D" uid="uid://btf4qcpasf5jq" path="res://assets/images/arrow.png" id="6_r1cff"]
@@ -24,6 +25,10 @@ centered = false
 [node name="handle" type="Sprite2D" parent="lupa"]
 position = Vector2(532, 1084)
 texture = ExtResource("3_4b3nu")
+
+[node name="Lazer" type="Sprite2D" parent="."]
+position = Vector2(1920, 14)
+texture = ExtResource("4_ir5b0")
 
 [node name="CompasCase" type="Sprite2D" parent="."]
 position = Vector2(238, 847)
