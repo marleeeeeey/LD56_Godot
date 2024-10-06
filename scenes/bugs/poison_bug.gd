@@ -16,5 +16,5 @@ func process_logic(_delta: float):
 func use_super_power():
 	var cloud = poison_cloud_scene.instantiate()
 	cloud.position = position
-	GameManager.add_child(cloud)
+	GameManager.spawn_scene(cloud)
 	print("PoisonBug: use_super_power")

@@ -68,7 +68,7 @@ func die():
 
 	var fire: Fire = fire_scene.instantiate()
 	fire.position = global_position
-	GameManager.add_child(fire)
+	GameManager.spawn_scene(fire)
 
 	queue_free()
 
@@ -126,7 +126,7 @@ func _spawn_trail():
 	var trail = trail_scene.instantiate()
 	trail.global_position = global_position
 	trail.rotation = velocity.angle()
-	GameManager.add_scene(trail)
+	GameManager.spawn_scene(trail)
 
 func _on_trails_timer_timeout() -> void:
 	if current_state == State.RUN_AWAY:

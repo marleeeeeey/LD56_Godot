@@ -18,15 +18,18 @@ script = ExtResource("1_jxq7h")
 distance_divider = 150.0
 
 [node name="background" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_ov88f")
 centered = false
 
 [node name="pillow" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(27, 26)
 texture = ExtResource("3_oabqm")
 centered = false
 
 [node name="lupa" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(479, 103)
 texture = ExtResource("4_ecpml")
 centered = false

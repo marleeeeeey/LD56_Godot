@@ -8,6 +8,8 @@ const simple_bug_count: int = 10
 const evade_bug_count: int = 10
 const poison_bug_count: int = 10
 
+const click_boost_multiplier := 0.1
+
 const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 const closest_bug_update_time = 0.3
 
@@ -15,6 +17,7 @@ var game_data: GameData
 var game_analytic: GameAnalytic
 
 var player: Player
+var lupa_viewport: Viewport
 var bugs: Array[BaseBug] = []
 var closest_bug: BaseBug = null
 var closest_bug_direction: Vector2 = Vector2.ZERO
@@ -22,6 +25,9 @@ var closest_bug_distance: float = INF
 
 var current_bugs_count: int = max_bugs_count
 var killed_bugs_count: int = 0
+
+var click_times = []
+var max_click_age = 1.0
 
 const game_field_size: Vector2 = Vector2(-4096, 4096)
 
@@ -37,6 +43,27 @@ signal bugs_count_changed(count: int)
 signal killed_bugs_count_changed(count: int)
 signal closest_bug_info_changed(direction: Vector2, distance: float)
 
+func _input(event: InputEvent) -> void:
+	if !is_game_running() or !player:
+		return
+
+	var is_mouse_event = event is InputEventMouseButton
+	var is_touch_event = event is InputEventScreenTouch
+	var is_left_click = is_mouse_event and event.button_index == MOUSE_BUTTON_LEFT
+
+	if is_left_click:
+		click_times.append(Time.get_ticks_msec() / 1000.0)
+
+	var is_mouse_button_pressed = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+
+	if is_mouse_button_pressed or is_touch_event:
+		var mouse_pos = player.get_global_mouse_position()
+		print("set target position to ", mouse_pos)
+		print("my position is ", player.global_position)
+		print("distance to target is ", player.global_position.distance_to(mouse_pos))
+		player.set_target_position(mouse_pos)
+		
+		
 func _ready():
 	_load_game()
 
@@ -51,10 +78,22 @@ func is_game_running() -> bool:
 
 func set_player(_player: Player) -> void:
 	player = _player
+	
+func set_lupa_viewport(_lupa_viewport: Viewport) -> void:
+	lupa_viewport = _lupa_viewport
 	reset_game()
 
 func get_player_position() -> Vector2:
+	if !player:
+		return Vector2.ZERO
+	
 	return player.global_position
+
+func get_click_boost() -> float:
+	var current_time = Time.get_ticks_msec() / 1000.0
+	click_times = click_times.filter(func(t): return current_time - t <= max_click_age)
+	var boost_from_click = 1 + click_boost_multiplier * click_times.size()
+	return boost_from_click
 
 func get_distance_to_player(bug: BaseBug) -> float:
 	var player_position := get_player_position()
@@ -121,8 +160,8 @@ func _set_game_state(state: GameState) -> void:
 	game_state = state
 	game_state_changed.emit(game_state)
 
-func add_scene(scene: Node) -> void:
-	add_child(scene)
+func spawn_scene(scene: Node) -> void:
+	lupa_viewport.add_child(scene)
 
 func _save_game():
 	GameData.save(game_data)
@@ -146,7 +185,7 @@ func _spawn_bug(bug_scene: PackedScene) -> void:
 	var bug = bug_scene.instantiate()
 	bug.position = _get_bug_random_position()
 	bugs.append(bug)
-	add_child(bug)
+	spawn_scene(bug)
 
 func _get_bug_random_position() -> Vector2:
 	return Vector2(randf_range(game_field_size.x, game_field_size.y), randf_range(game_field_size.x, game_field_size.y))
