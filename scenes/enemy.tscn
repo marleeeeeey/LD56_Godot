@@ -24,6 +24,7 @@ texture = ExtResource("1_3nlo1")
 position = Vector2(-131, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(21, 1)

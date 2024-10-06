@@ -30,12 +30,12 @@ func _physics_process(delta: float) -> void:
 		Globals.move_towards_direction_with_angle_interpolation(self, drift_direction, speed, 0.02)
 
 func on_drift_timer_timeout() -> void:
-	print("on_drift_timer_timeout")
+	#print("on_drift_timer_timeout")
 	drift_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	drift_timer.start(Globals.get_random_near_value(drift_change_interval))
 
 func on_child_leave_base_zone(child: Child):
-	print("on_child_leave_base_zone")
+	#print("on_child_leave_base_zone")
 	if child is not Child:
 		return
 

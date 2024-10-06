@@ -12,17 +12,21 @@ class_name Enemy
 
 var target: Child
 var catched_target: Child
-var speed = 100
-var spawn_pos: Vector2
+var speed = 50
+var target_pos_when_complete_or_died: Vector2
 var base_area: Area2D  # should be set outside
+var dead_area: Area2D  # should be set outside. Area where they fall down.
+var lives = 3
 
 
 func _ready() -> void:
-	spawn_pos = global_position
 	catch_area.body_entered.connect(on_body_entered)
 
 
 func _process(delta: float) -> void:
+	if lives <= 0:
+		return
+
 	if catched_target:
 		return
 
@@ -38,25 +42,39 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if target:
-		if target.is_catched:
+		if target.is_catched or lives <= 0:
 			target = null  # stop forward to this item because it already catched
 		else:
+			#print("moving to target: ", target.global_position)
 			Globals.move_towards_position(self, target.global_position, speed)
 	else:
-		Globals.move_towards_position(self, spawn_pos, speed)
+		#print("moving to dead zone: ", target_pos_when_complete_or_died)
+		Globals.move_towards_position(self, target_pos_when_complete_or_died, speed)
 
 
-func on_body_entered(body: Child) -> void:
-	if body.is_catched:
-		#print("I can't cant this")
-		return
+func on_body_entered(body: Node2D) -> void:
+	if body is Child:
+		var child: Child = body
+		if child.is_catched:
+			#print("I can't cant this")
+			return
 
-	body.catching_by(self)
-	body.reparent(self.connection_point)
-	body.position = Vector2.ZERO
-	target = null
-	catched_target = body
-	catch_area.body_entered.disconnect(on_body_entered)
+		child.catching_by(self)
+		child.reparent(self.connection_point)
+		child.position = Vector2.ZERO
+		target = null
+		catched_target = child
+		#catch_area.body_entered.disconnect(on_body_entered)
+
+	if body is Bullet:
+		var bullet: Bullet = body
+		lives -= 1
+		print("lives:", lives)
+		if lives == 0:
+			target_pos_when_complete_or_died = Globals.get_random_point_in_area(dead_area)
+			#print("target pos set to died: ", target_pos_when_complete_or_died)
+			target = null
+		bullet.queue_free()
 
 
 func my_target_catched_by_someone(other: Enemy):
@@ -76,6 +94,17 @@ func on_return_to_base_area(other: Enemy):
 		queue_free()
 
 
+func on_enter_to_dead_area(other: Enemy):
+	if target == null and other == self:
+		print("enter dead area")
+
+
 func set_base_area(area: Area2D):
 	base_area = area
 	base_area.body_entered.connect(on_return_to_base_area)
+	target_pos_when_complete_or_died = Globals.get_random_point_in_area(base_area)
+
+
+func set_dead_area(area: Area2D):
+	dead_area = area
+	dead_area.body_entered.connect(on_enter_to_dead_area)

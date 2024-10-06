@@ -33,7 +33,7 @@ func create_in_global_pos(global_pos: Vector2, scene: PackedScene) -> Node:
 	return new_node
 
 
-func add_debug_label(node: Node, text: String) -> void:
+func add_debug_label(node: Node, text: String, append: bool = false) -> void:
 	var debug_label_name = "_debug_label"
 	var label = node.get_node_or_null(debug_label_name)
 
@@ -51,13 +51,58 @@ func add_debug_label(node: Node, text: String) -> void:
 
 		node.add_child(label)
 
-	label.text = text
+	if append:
+		label.text += "\n" + text
+	else:
+		label.text = text
 
 
 func get_random_point_in_rect(rect: Rect2) -> Vector2:
 	var random_x = randf_range(rect.position.x, rect.position.x + rect.size.x)
 	var random_y = randf_range(rect.position.y, rect.position.y + rect.size.y)
 	return Vector2(random_x, random_y)
+
+
+func get_random_point_in_area(area: Area2D) -> Vector2:
+	var collision_shapes = area.get_children()
+	assert(collision_shapes.size() > 0, "[get_random_point_in_area] Area2D should have at least one CollisionShape2D child")
+	var collision_shape: CollisionShape2D = collision_shapes[0]
+	var global_transform: Transform2D = area.get_global_transform()
+	print(global_transform)
+	var shape: Shape2D = collision_shape.shape
+
+	if shape is RectangleShape2D:
+		var rect_shape = shape as RectangleShape2D
+		var random_x = randf_range(-rect_shape.extents.x, rect_shape.extents.x)
+		var random_y = randf_range(-rect_shape.extents.y, rect_shape.extents.y)
+		print("random_x,y: ", random_x, " ", random_y)
+		return Vector2(random_x, random_y)
+
+	#elif shape is CircleShape2D:
+		#var circle_shape = shape as CircleShape2D
+		#var radius = circle_shape.radius * sqrt(randf())  # sqrt для равномерного распределения
+		#var angle = randf_range(0, PI * 2)
+		#var random_point = Vector2(cos(angle), sin(angle)) * radius
+		#return global_transform.basis_xform(random_point)
+#
+	#elif shape is CapsuleShape2D:
+		#var capsule_shape = shape as CapsuleShape2D
+		#var random_y = randf_range(-capsule_shape.height / 2, capsule_shape.height / 2)
+		#var random_x = randf_range(-capsule_shape.radius, capsule_shape.radius)
+		#return global_transform.basis_xform(Vector2(random_x, random_y))
+#
+	#elif shape is ConvexPolygonShape2D:
+		#var polygon_shape = shape as ConvexPolygonShape2D
+		#var points = polygon_shape.points
+		#var point_count = points.size()
+		#if point_count > 2:
+			#var idx1 = randi_range(0, point_count - 1)
+			#var idx2 = (idx1 + 1) % point_count
+			#var random_point = points[idx1].lerp(points[idx2], randf())
+			#return global_transform.basis_xform(random_point)
+
+	assert(false, "[get_random_point_in_area] Unsupported shape type: " + str(collision_shape))
+	return Vector2.ZERO
 
 
 func calc_rect_from_path_2d(path_2d: Path2D) -> Rect2:
@@ -127,5 +172,4 @@ func move_towards_direction_with_angle_interpolation(
 
 func get_random_near_value(value: float, variance: float = 0.25) -> float:
 	var rand_value = randf_range(value * (1 - variance / 2), value * (1 + variance / 2))
-	print(rand_value)
 	return rand_value
