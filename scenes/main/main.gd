@@ -8,5 +8,5 @@ func _ready():
 
 	GameManager.set_lupa_viewport(%LupaViewport)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	world_camera.position = GameManager.get_player_position()

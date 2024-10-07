@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://x6rlphswjcjw"]
+
+[ext_resource type="Texture2D" uid="uid://be6vttrc4o25f" path="res://assets/images/bug_dust_.png" id="1_3pfea"]
+
+[node name="Dust" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 32)
+scale = Vector2(0.778605, 0.796456)
+texture = ExtResource("1_3pfea")

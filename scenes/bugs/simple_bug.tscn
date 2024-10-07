@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg525qaxc3vyn"]
+[gd_scene load_steps=4 format=3 uid="uid://dg525qaxc3vyn"]
 
-[ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="1_0wudf"]
 [ext_resource type="Script" path="res://scenes/bugs/simple_bug.gd" id="1_us5nw"]
-[ext_resource type="AudioStream" uid="uid://bsinwb1r1bn3r" path="res://assets/sfx/explosion.wav" id="3_wl813"]
+[ext_resource type="PackedScene" uid="uid://cm5d0vc7717mv" path="res://scenes/bugs/bug_sprite.tscn" id="4_pklxw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcdm"]
 size = Vector2(302, 228)
@@ -16,19 +15,9 @@ script = ExtResource("1_us5nw")
 speed = 450
 walk_speed = 450
 
-[node name="Sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture = ExtResource("1_0wudf")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 11)
 shape = SubResource("RectangleShape2D_0dcdm")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_wl813")
-volume_db = -4.952
-
-[node name="TrailsTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[connection signal="timeout" from="TrailsTimer" to="." method="_on_trails_timer_timeout"]
+[node name="BugSprite" parent="." instance=ExtResource("4_pklxw")]
+unique_name_in_owner = true

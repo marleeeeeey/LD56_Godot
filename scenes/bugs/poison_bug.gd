@@ -10,6 +10,10 @@ const trails_scene: PackedScene = preload("res://scenes/trail/trail.tscn")
 var evade_time := 0.0
 var evade_direction := Vector2.ZERO
 
+func _ready() -> void:
+	super._ready()
+	bug_sprite.set_color(Color.GREEN)
+
 func process_additional_logic(_delta: float):
 	if evade_direction != Vector2.ZERO:
 		velocity = evade_direction * speed

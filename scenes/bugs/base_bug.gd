@@ -5,9 +5,7 @@ class_name BaseBug
 const footsteps_texture := preload("res://assets/images/trails.png")
 
 const trail_scene := preload("res://scenes/trail/trail.tscn")
-const fire_scene := preload("res://scenes/fire/fire.tscn")
-const death_sound := preload("res://assets/sfx/explosion.wav")
-const burn_texture := preload("res://assets/images/burn_enemy.png")
+const dust_scene := preload("res://scenes/dust/dust.tscn")
 
 @export var speed := 400
 @export var walk_speed := 300
@@ -20,7 +18,7 @@ const burn_texture := preload("res://assets/images/burn_enemy.png")
 @export var max_distance_from_player := 2000
 @export var random_direction_change_time := 2
 
-@onready var sprite := %Sprite
+@onready var bug_sprite: BugSprite = %BugSprite
 
 var death_sound_player: AudioStreamPlayer
 
@@ -42,10 +40,6 @@ var random_direction_change_timer: Timer
 
 
 func _ready():
-	death_sound_player = AudioStreamPlayer.new()
-	death_sound_player.stream = death_sound
-	add_child(death_sound_player)
-
 	super_power_timer = Timer.new()
 	add_child(super_power_timer)
 	super_power_timer.wait_time = first_super_power_cooldown
@@ -78,13 +72,13 @@ func update_additional_state(_delta: float):
 
 func die():
 	current_state = State.DEAD
-	sprite.texture = burn_texture
-	death_sound_player.play()
-	await death_sound_player.finished
+	bug_sprite.play_animation(BugSprite.BugAnimation.DEATH)
 
-	var fire: Fire = fire_scene.instantiate()
-	fire.position = global_position
-	GameManager.spawn_scene(fire)
+	await bug_sprite.get_animation_player().animation_finished
+
+	var dust = dust_scene.instantiate()
+	dust.global_position = global_position
+	GameManager.spawn_scene(dust)
 
 	queue_free()
 
@@ -171,9 +165,9 @@ func _on_trails_timer_timeout() -> void:
 
 func _update_sprite_direction():
 	if velocity.x > 0:
-		sprite.flip_h = true
+		bug_sprite.scale.x = -1
 	elif velocity.x < 0:
-		sprite.flip_h = false
+		bug_sprite.scale.x = 1
 
 func _on_super_power_timer_timeout():
 	if is_dead() or !is_running_away():

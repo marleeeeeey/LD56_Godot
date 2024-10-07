@@ -10,6 +10,10 @@ var evade_direction := Vector2.ZERO
 var evade_time = 0.0
 var last_change_direction_time = 0.0
 
+func _ready() -> void:
+	bug_sprite.set_color(Color.RED)
+	super._ready()
+
 func process_additional_logic(_delta: float):
 	if evade_direction == Vector2.ZERO:
 		return

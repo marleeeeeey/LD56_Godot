@@ -1,14 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cro4mv4dibaj7"]
+[gd_scene load_steps=4 format=3 uid="uid://cro4mv4dibaj7"]
 
-[ext_resource type="Texture2D" uid="uid://sqq4ky0810in" path="res://assets/images/enemy.png" id="1_0wudf"]
 [ext_resource type="Script" path="res://scenes/bugs/evade_bug.gd" id="1_nfq6w"]
-[ext_resource type="AudioStream" uid="uid://bsinwb1r1bn3r" path="res://assets/sfx/explosion.wav" id="3_wl813"]
+[ext_resource type="PackedScene" uid="uid://cm5d0vc7717mv" path="res://scenes/bugs/bug_sprite.tscn" id="2_llikd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcdm"]
 size = Vector2(302, 228)
 
 [node name="EvadeBug" type="CharacterBody2D"]
-modulate = Color(1, 0.258824, 0, 1)
 z_index = 1
 collision_layer = 2
 collision_mask = 8
@@ -17,19 +15,9 @@ evade_speed = 650
 speed = 550
 super_power_cooldown = 5
 
-[node name="Sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture = ExtResource("1_0wudf")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 11)
 shape = SubResource("RectangleShape2D_0dcdm")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_wl813")
-volume_db = -4.952
-
-[node name="TrailsTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[connection signal="timeout" from="TrailsTimer" to="." method="_on_trails_timer_timeout"]
+[node name="BugSprite" parent="." instance=ExtResource("2_llikd")]
+unique_name_in_owner = true
