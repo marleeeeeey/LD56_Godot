@@ -11,7 +11,6 @@ script = ExtResource("1_0m654")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_36v5a")
-autoplay = true
 
 [node name="UI" parent="." instance=ExtResource("9_2oeek")]
 

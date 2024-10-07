@@ -4,7 +4,7 @@ class_name Trail
 
 @export var texture: Texture2D
 @export var max_life_time := 3.0
-@export var opacity_multiplier := 1
+@export var fade_start_time := 1.0
 @export var has_fade_out := true
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -25,9 +25,11 @@ func _on_timer_timeout() -> void:
 		queue_free()
 
 func update_opacity():
-	if !has_fade_out:
+	if !has_fade_out or fade_start_time > life_time:
 		return
 
-	var progress = life_time / max_life_time
-	var opacity = 1.0 - (progress * opacity_multiplier)
+	var fade_time = max_life_time - fade_start_time
+	var fade_progress = (life_time - fade_start_time) / fade_time
+
+	var opacity = 1.0 - fade_progress
 	sprite.modulate.a = opacity
