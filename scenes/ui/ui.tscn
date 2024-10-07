@@ -363,4 +363,8 @@ libraries = {
 "": SubResource("AnimationLibrary_tjgxg")
 }
 
+[node name="ComboAudio" type="AudioStreamPlayer" parent="Combo"]
+unique_name_in_owner = true
+volume_db = 20.0
+
 [connection signal="button_down" from="Win/VBoxContainer/Button" to="." method="_on_button_pressed"]
