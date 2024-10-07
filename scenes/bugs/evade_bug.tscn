@@ -13,10 +13,9 @@ z_index = 1
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_nfq6w")
-max_evade_time = 5.0
 evade_speed = 650
 speed = 550
-super_power_cooldown = 1
+super_power_cooldown = 5
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

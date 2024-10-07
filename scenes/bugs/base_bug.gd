@@ -13,6 +13,7 @@ const burn_texture := preload("res://assets/images/burn_enemy.png")
 @export var walk_speed := 300
 @export var run_away_distance := 450
 @export var run_away_safe_distance := 1000
+@export var first_super_power_cooldown := 1
 @export var super_power_cooldown := 3
 @export var trails_cooldown := 0.4
 @export var trails_life_time := 10
@@ -31,12 +32,14 @@ enum State {
 }
 var current_state: State = State.WALK
 var run_away_time: float = 0.0
-var is_first_super_power: bool = true
 var target_direction: Vector2 = Vector2.ZERO
 
+var is_first_super_power: bool = true
 var super_power_timer: Timer
+
 var trails_timer: Timer
 var random_direction_change_timer: Timer
+
 
 func _ready():
 	death_sound_player = AudioStreamPlayer.new()
@@ -45,7 +48,7 @@ func _ready():
 
 	super_power_timer = Timer.new()
 	add_child(super_power_timer)
-	super_power_timer.wait_time = super_power_cooldown
+	super_power_timer.wait_time = first_super_power_cooldown
 	super_power_timer.timeout.connect(_on_super_power_timer_timeout)
 
 	trails_timer = Timer.new()
@@ -176,6 +179,10 @@ func _on_super_power_timer_timeout():
 	if is_dead() or !is_running_away():
 		return
 
+	if is_first_super_power:
+		is_first_super_power = false
+		super_power_timer.wait_time = super_power_cooldown
+	
 	use_super_power()
 
 func is_far_from_player() -> bool:
