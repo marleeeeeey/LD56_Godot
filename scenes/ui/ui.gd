@@ -60,7 +60,7 @@ func update_combo(combo_count: int):
 	
 	if combo_text != null:
 		if combo_audio_player.playing:
-			await combo_audio_player.stream_finished
+			await combo_audio_player.finished
 			
 		combo_audio_player.stream = combo_sound
 		combo_audio_player.play(0.5)
