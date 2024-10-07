@@ -108,6 +108,9 @@ func get_bugs_count() -> int:
 	return bugs.size()
 
 func handle_bug_hit(bug: BaseBug) -> void:
+	if bug.is_dead():
+		return
+
 	bug.die()
 
 	bugs = bugs.filter(func(b): return !b.is_dead())
