@@ -4,7 +4,6 @@ class_name BaseBug
 
 const footsteps_texture := preload("res://assets/images/trails.png")
 
-const trail_scene := preload("res://scenes/trail/trail.tscn")
 const dust_scene := preload("res://scenes/dust/dust.tscn")
 
 @export var speed := 400
@@ -36,7 +35,6 @@ var target_direction: Vector2 = Vector2.ZERO
 var is_first_super_power: bool = true
 var super_power_timer: Timer
 
-var trails_timer: Timer
 var random_direction_change_timer: Timer
 
 
@@ -45,11 +43,6 @@ func _ready():
 	add_child(super_power_timer)
 	super_power_timer.wait_time = first_super_power_cooldown
 	super_power_timer.timeout.connect(_on_super_power_timer_timeout)
-
-	trails_timer = Timer.new()
-	add_child(trails_timer)
-	trails_timer.wait_time = trails_cooldown
-	trails_timer.timeout.connect(_on_trails_timer_timeout)
 
 	random_direction_change_timer = Timer.new()
 	add_child(random_direction_change_timer)
@@ -126,13 +119,11 @@ func _process_common_logic(delta: float):
 func _set_walk_state():
 	current_state = State.WALK
 	target_direction = Globals.get_random_direction()
-	trails_timer.start()
 	super_power_timer.stop()
 	random_direction_change_timer.start()
 
 func _set_run_away_state():
 	current_state = State.RUN_AWAY
-	trails_timer.start()
 	super_power_timer.start()
 	random_direction_change_timer.stop()
 
@@ -151,18 +142,6 @@ func _get_direction_away_from_player() -> Vector2:
 func _get_direction_to_player() -> Vector2:
 	var player_position := GameManager.get_player_position()
 	return (player_position - global_position).normalized()
-
-func _spawn_trail():
-	var trail = trail_scene.instantiate()
-	trail.texture = footsteps_texture
-	trail.max_life_time = trails_life_time
-	trail.global_position = global_position
-	trail.rotation = velocity.angle()
-	GameManager.spawn_scene(trail)
-
-func _on_trails_timer_timeout() -> void:
-	if current_state == State.RUN_AWAY or current_state == State.WALK:
-		_spawn_trail()
 
 func _update_sprite_direction():
 	if velocity.x > 0:
