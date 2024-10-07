@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=12 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
 [ext_resource type="Texture2D" uid="uid://c2f8b48m3sgde" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
@@ -7,6 +7,9 @@
 [ext_resource type="LabelSettings" uid="uid://cnh84tkbf88o0" path="res://scenes/ui/ui_label.tres" id="5_5fjyf"]
 [ext_resource type="Texture2D" uid="uid://celmimphh8aqv" path="res://assets/images/case.png" id="5_jtvnq"]
 [ext_resource type="Texture2D" uid="uid://juvb6jaji5fo" path="res://assets/images/arrow.png" id="6_r1cff"]
+[ext_resource type="Texture2D" uid="uid://cf7nr7df6r283" path="res://assets/images/bug_head_.png" id="7_1pf87"]
+[ext_resource type="Texture2D" uid="uid://rq7bxs55l0qo" path="res://assets/images/bug_mouth_.png" id="8_cwoc5"]
+[ext_resource type="Texture2D" uid="uid://if6ebh2eloqp" path="res://assets/images/bug_eyes_.png" id="9_nhdqi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ufnug"]
 font_size = 64
@@ -43,60 +46,51 @@ texture = ExtResource("6_r1cff")
 [node name="Info" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = 33.0
+offset_top = 25.0
+offset_right = 33.0
+offset_bottom = 25.0
 
-[node name="PanelContainer" type="PanelContainer" parent="Info"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Info"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Info/PanelContainer"]
+[node name="Control" type="Control" parent="Info/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Info/PanelContainer/VBoxContainer"]
+[node name="Head" type="TextureRect" parent="Info/HBoxContainer/Control"]
 layout_mode = 2
+offset_left = 4.0
+offset_right = 4.0
+offset_bottom = 40.0
+texture = ExtResource("7_1pf87")
+flip_h = true
 
-[node name="Label" type="Label" parent="Info/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Mouth" type="TextureRect" parent="Info/HBoxContainer/Control/Head"]
 layout_mode = 2
-text = "BUGS STILL ALIVE:"
-label_settings = ExtResource("5_5fjyf")
+offset_left = 36.0
+offset_top = 114.0
+offset_right = 174.0
+offset_bottom = 186.0
+texture = ExtResource("8_cwoc5")
+flip_h = true
 
-[node name="Total" type="Label" parent="Info/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Eyes" type="TextureRect" parent="Info/HBoxContainer/Control/Head"]
+layout_mode = 2
+offset_left = 30.0
+offset_top = 26.0
+offset_right = 136.0
+offset_bottom = 99.0
+texture = ExtResource("9_nhdqi")
+flip_h = true
+
+[node name="Total" type="Label" parent="Info/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "34"
 label_settings = ExtResource("5_5fjyf")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Info/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Info/PanelContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "KILLED BUGS:"
-label_settings = ExtResource("5_5fjyf")
-
-[node name="Killed" type="Label" parent="Info/PanelContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-label_settings = ExtResource("5_5fjyf")
-
-[node name="Distance" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 206.0
-offset_top = -390.0
-offset_right = 263.0
-offset_bottom = -345.0
-grow_vertical = 0
-size_flags_horizontal = 4
-text = "dist"
-label_settings = ExtResource("5_5fjyf")
-metadata/_edit_use_anchors_ = true
 
 [node name="Win" type="PanelContainer" parent="."]
 unique_name_in_owner = true
