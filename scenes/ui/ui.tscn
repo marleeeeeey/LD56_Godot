@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=20 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
 [ext_resource type="Texture2D" uid="uid://c2f8b48m3sgde" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cf7nr7df6r283" path="res://assets/images/bug_head_.png" id="7_1pf87"]
 [ext_resource type="Texture2D" uid="uid://rq7bxs55l0qo" path="res://assets/images/bug_mouth_.png" id="8_cwoc5"]
 [ext_resource type="Texture2D" uid="uid://if6ebh2eloqp" path="res://assets/images/bug_eyes_.png" id="9_nhdqi"]
+[ext_resource type="Texture2D" uid="uid://bfie0m67ptm55" path="res://assets/images/win.png" id="12_iouj2"]
 
 [sub_resource type="Animation" id="Animation_s27x7"]
 resource_name = "lazer"
@@ -123,10 +124,10 @@ _data = {
 "lazer": SubResource("Animation_s27x7")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_ufnug"]
+[sub_resource type="LabelSettings" id="LabelSettings_73thr"]
 font_size = 64
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_8lomv"]
 resource_name = "combo"
@@ -301,34 +302,42 @@ layout_mode = 2
 text = "34"
 label_settings = ExtResource("5_5fjyf")
 
-[node name="Win" type="PanelContainer" parent="."]
+[node name="Win" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
+layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -367.0
-offset_top = 160.0
-offset_right = 359.0
-offset_bottom = 339.0
+offset_left = -603.0
+offset_top = 16.0
+offset_right = 541.0
+offset_bottom = 1593.0
 grow_horizontal = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Win"]
 layout_mode = 2
+offset_right = 1144.0
+offset_bottom = 1577.0
 
 [node name="Label" type="Label" parent="Win/VBoxContainer"]
 layout_mode = 2
-text = "PILLOW IS CLEAN NOW!
-HAVE A REST!"
-label_settings = SubResource("LabelSettings_ufnug")
+size_flags_horizontal = 4
+text = "You killed all bugs!
+Have a good rest!"
+label_settings = SubResource("LabelSettings_73thr")
 
-[node name="VSeparator" type="VSeparator" parent="Win/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Win/VBoxContainer"]
+custom_minimum_size = Vector2(768, 704)
 layout_mode = 2
+texture = ExtResource("12_iouj2")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Button" type="Button" parent="Win/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "PLAY AGAIN?"
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 96
+text = "Play again?"
 
 [node name="Combo" type="Label" parent="."]
 unique_name_in_owner = true
@@ -354,4 +363,4 @@ libraries = {
 "": SubResource("AnimationLibrary_tjgxg")
 }
 
-[connection signal="pressed" from="Win/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="button_down" from="Win/VBoxContainer/Button" to="." method="_on_button_pressed"]
