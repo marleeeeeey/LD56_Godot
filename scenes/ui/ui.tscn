@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmx4ykv2sro7q"]
+[gd_scene load_steps=15 format=3 uid="uid://bmx4ykv2sro7q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_jxq7h"]
 [ext_resource type="Texture2D" uid="uid://c2f8b48m3sgde" path="res://assets/images/lupa_glass.png" id="2_ren4m"]
@@ -15,6 +15,91 @@
 font_size = 64
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_8lomv"]
+resource_name = "combo"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Combo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(610, 19), Vector2(610, 19), Vector2(649, 55), Vector2(610, 19), Vector2(649, 55), Vector2(610, 19), Vector2(649, 55), Vector2(610, 19), Vector2(649, 55)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Combo:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Combo:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 0.00784314, 0, 1), Color(1, 0.00784314, 0, 1), Color(1, 0.00784314, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ieox7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Combo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(610, 19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Combo:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Combo:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tjgxg"]
+_data = {
+"RESET": SubResource("Animation_ieox7"),
+"combo": SubResource("Animation_8lomv")
+}
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_jxq7h")
@@ -120,5 +205,28 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 128
 text = "PLAY AGAIN?"
+
+[node name="Combo" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -350.0
+offset_top = 19.0
+offset_right = 350.0
+offset_bottom = 194.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "Double Kill!"
+label_settings = ExtResource("5_5fjyf")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ComboAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_tjgxg")
+}
 
 [connection signal="pressed" from="Win/VBoxContainer/Button" to="." method="_on_button_pressed"]

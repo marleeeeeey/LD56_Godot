@@ -5,12 +5,11 @@ const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
 const poison_bug_scene = preload("res://scenes/bugs/poison_bug.tscn")
 
 const idle_bug_count: int = 5
-const simple_bug_count: int = 10
-const evade_bug_count: int = 5
+const simple_bug_count: int = 15
+const evade_bug_count: int = 10
 const poison_bug_count: int = 10
-const max_bugs_count: int = simple_bug_count + evade_bug_count + poison_bug_count
 
-const click_boost_multiplier := 0.02
+const click_boost_multiplier := 0.01
 
 const closest_bug_update_time = 0.3
 
@@ -29,6 +28,10 @@ var killed_bugs_count: int = 0
 var click_times = []
 var max_click_age = 1.0
 
+const combo_reset_time = 0.8
+var current_combo = 0
+var combo_timer: Timer
+
 const game_field_size: Vector2 = Vector2(-4096, 4096)
 const lupa_field_size: Vector2 = Vector2(-500, 500)
 const lazer_point_safe_distance: float = 100
@@ -44,6 +47,7 @@ signal game_state_changed(state: GameState)
 signal bugs_count_changed(count: int)
 signal killed_bugs_count_changed(count: int)
 signal closest_bug_info_changed(direction: Vector2, distance: float)
+signal combo_changed(combo: int)
 
 func _input(event: InputEvent) -> void:
 	if !is_game_running() or !player:
@@ -75,6 +79,11 @@ func _ready():
 	timer.autostart = true
 	timer.timeout.connect(_update_closest_bug_direction)
 	add_child(timer)
+
+	combo_timer = Timer.new()
+	combo_timer.one_shot = true
+	combo_timer.timeout.connect(_reset_combo)
+	add_child(combo_timer)
 
 	
 func is_game_running() -> bool:
@@ -118,6 +127,8 @@ func handle_bug_hit(bug: BaseBug) -> void:
 	bugs_count_changed.emit(get_bugs_count())
 	killed_bugs_count_changed.emit(killed_bugs_count)
 
+	_increase_combo()
+
 	if get_bugs_count() == 0:
 		_set_game_state(GameState.WON)
 	else:
@@ -127,7 +138,7 @@ func reset_game() -> void:
 	bugs.clear()
 	_spawn_bugs()
 	closest_bug = _get_closest_bug()
-
+	_reset_combo()
 	_set_game_state(GameState.RUNNING)
 
 func _get_closest_bug() -> BaseBug:
@@ -217,3 +228,15 @@ func _get_bug_random_position_inside_lupa() -> Vector2:
 		random_point = Vector2(randf_range(lupa_field_size.x, lupa_field_size.y), randf_range(lupa_field_size.x, lupa_field_size.y))
 
 	return random_point
+
+func _increase_combo() -> void:
+	current_combo += 1
+	combo_timer.stop()
+	combo_timer.start(combo_reset_time)
+
+func _reset_combo() -> void:
+	combo_changed.emit(current_combo)
+
+	if current_combo > 0:
+		current_combo = 0
+		combo_changed.emit(current_combo)
