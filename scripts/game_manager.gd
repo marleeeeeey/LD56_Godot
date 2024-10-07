@@ -72,7 +72,7 @@ func _input(event: InputEvent) -> void:
 		
 		
 func _ready():
-	_load_game()
+	# _load_game()
 
 	var timer = Timer.new()
 	timer.wait_time = closest_bug_update_time
