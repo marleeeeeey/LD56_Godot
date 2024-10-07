@@ -11,7 +11,7 @@ var evade_time = 0.0
 var last_change_direction_time = 0.0
 
 func _ready() -> void:
-	bug_sprite.set_color(Color.RED)
+	bug_sprite.set_color(Color(1, 0.194, 0.144))
 	super._ready()
 
 func process_additional_logic(_delta: float):

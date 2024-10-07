@@ -12,7 +12,7 @@ var evade_direction := Vector2.ZERO
 
 func _ready() -> void:
 	super._ready()
-	bug_sprite.set_color(Color.GREEN)
+	bug_sprite.set_color(Color(0, 0.855, 0))
 
 func process_additional_logic(_delta: float):
 	if evade_direction != Vector2.ZERO:
