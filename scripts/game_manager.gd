@@ -4,7 +4,7 @@ const simple_bug_scene = preload("res://scenes/bugs/simple_bug.tscn")
 const evade_bug_scene = preload("res://scenes/bugs/evade_bug.tscn")
 const poison_bug_scene = preload("res://scenes/bugs/poison_bug.tscn")
 
-const idle_bug_count: int = 5
+const idle_bug_count: int = 4
 const simple_bug_count: int = 15
 const evade_bug_count: int = 10
 const poison_bug_count: int = 10
@@ -28,7 +28,7 @@ var killed_bugs_count: int = 0
 var click_times = []
 var max_click_age = 1.0
 
-const combo_reset_time = 0.8
+const combo_reset_time = 1
 var current_combo = 0
 var combo_timer: Timer
 
@@ -236,7 +236,4 @@ func _increase_combo() -> void:
 
 func _reset_combo() -> void:
 	combo_changed.emit(current_combo)
-
-	if current_combo > 0:
-		current_combo = 0
-		combo_changed.emit(current_combo)
+	current_combo = 0

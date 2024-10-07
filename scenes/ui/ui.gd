@@ -32,6 +32,7 @@ func update_win_label_visibility(game_state: GameManager.GameState) -> void:
 	%Win.visible = game_state == GameManager.GameState.WON
 
 func update_combo(combo_count: int):
+	# print("combo:", combo_count)  
 	if combo_count < 2:
 		return
 
@@ -48,7 +49,7 @@ func update_combo(combo_count: int):
 		4:
 			combo_text = "Ultra Kill!"
 			combo_sound = ultra_kill_sound
-		5:
+		_:
 			combo_text = "Rampage!"
 			combo_sound = rampage_sound
 	
@@ -57,7 +58,7 @@ func update_combo(combo_count: int):
 			await combo_audio_player.stream_finished
 			
 		combo_audio_player.stream = combo_sound
-		combo_audio_player.play(1)
+		combo_audio_player.play(0.5)
 		combo_label.text = combo_text
 		combo_animation.play("combo")
 			
