@@ -27,6 +27,8 @@ func update_additional_state(_delta: float):
 		evade_direction = Vector2.ZERO
 
 func use_super_power():
+	%BombStreamPlayer.play()
+	
 	var trail: Trail = trails_scene.instantiate()
 	trail.position = position
 	trail.texture = poison_cloud_texture

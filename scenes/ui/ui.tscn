@@ -13,6 +13,57 @@
 [ext_resource type="Texture2D" uid="uid://if6ebh2eloqp" path="res://assets/images/bug_eyes_.png" id="9_nhdqi"]
 [ext_resource type="Texture2D" uid="uid://bfie0m67ptm55" path="res://assets/images/win.png" id="12_iouj2"]
 
+[sub_resource type="Animation" id="Animation_ufu51"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LazerAura:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-201, 113)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LazerAura:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LazerAura:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LazerAura:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.356863, 0.0509804, 0.517647)]
+}
+
 [sub_resource type="Animation" id="Animation_s27x7"]
 resource_name = "lazer"
 length = 0.7
@@ -67,24 +118,35 @@ tracks/3/keys = {
 "values": [Color(1, 0.356863, 0.0509804, 0.741176), Color(1, 0.188235, 0.0509804, 0.847059), Color(1, 0.407843, 0.0509804, 0.517647), Color(1, 0.145098, 0.0509804, 0.839216), Color(1, 0.462745, 0.0509804, 0.517647), Color(1, 0.141176, 0.0509804, 0.858824)]
 }
 
-[sub_resource type="Animation" id="Animation_ufu51"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n5meh"]
+_data = {
+"RESET": SubResource("Animation_ufu51"),
+"lazer": SubResource("Animation_s27x7")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_73thr"]
+font_size = 64
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ieox7"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LazerAura:position")
+tracks/0/path = NodePath("Combo:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-201, 113)]
+"values": [Vector2(610, 19)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LazerAura:rotation")
+tracks/1/path = NodePath("Combo:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -96,38 +158,15 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("LazerAura:scale")
+tracks/2/path = NodePath("Combo:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LazerAura:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0.356863, 0.0509804, 0.517647)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n5meh"]
-_data = {
-"RESET": SubResource("Animation_ufu51"),
-"lazer": SubResource("Animation_s27x7")
-}
-
-[sub_resource type="LabelSettings" id="LabelSettings_73thr"]
-font_size = 64
-shadow_size = 10
-shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_8lomv"]
 resource_name = "combo"
@@ -167,45 +206,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 0.00784314, 0, 1), Color(1, 0.00784314, 0, 1), Color(1, 0.00784314, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_ieox7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Combo:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(610, 19)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Combo:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Combo:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tjgxg"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bta4tnwmr8jsu"]
+[gd_scene load_steps=5 format=3 uid="uid://bta4tnwmr8jsu"]
 
 [ext_resource type="Script" path="res://scenes/bugs/poison_bug.gd" id="1_aaaaa"]
 [ext_resource type="PackedScene" uid="uid://cm5d0vc7717mv" path="res://scenes/bugs/bug_sprite.tscn" id="2_xs7su"]
+[ext_resource type="AudioStream" uid="uid://cojhrn28mwlhm" path="res://assets/sfx/perdez_001.wav" id="3_xlf83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pb3k"]
 size = Vector2(247, 194)
@@ -20,3 +21,7 @@ shape = SubResource("RectangleShape2D_4pb3k")
 
 [node name="BugSprite" parent="." instance=ExtResource("2_xs7su")]
 unique_name_in_owner = true
+
+[node name="BombStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_xlf83")
