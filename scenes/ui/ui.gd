@@ -29,7 +29,12 @@ func update_compass_direction(direction: Vector2, _distance: float):
 	%CompasArrow.rotation = direction.angle()
 	
 func update_win_label_visibility(game_state: GameManager.GameState) -> void:
-	%Win.visible = game_state == GameManager.GameState.WON
+	var is_win: bool = game_state == GameManager.GameState.WON
+	%Win.visible = is_win
+	%Lupa.visible = !is_win
+	%CompasCase.visible = !is_win
+	%Lazer.visible = !is_win
+
 
 func update_combo(combo_count: int):
 	# print("combo:", combo_count)  

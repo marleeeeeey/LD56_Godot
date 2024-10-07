@@ -201,6 +201,8 @@ func _spawn_bugs() -> void:
 	for i in range(poison_bug_count):
 		_spawn_bug(poison_bug_scene)
 
+	bugs_count_changed.emit(get_bugs_count())
+
 func _spawn_bug(bug_scene: PackedScene) -> void:
 	var bug = bug_scene.instantiate()
 	bug.position = _get_bug_random_position()

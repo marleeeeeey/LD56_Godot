@@ -218,17 +218,19 @@ _data = {
 script = ExtResource("1_jxq7h")
 distance_divider = 150.0
 
-[node name="lupa" type="Sprite2D" parent="."]
+[node name="Lupa" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(473, 144)
 scale = Vector2(0.860205, 0.886918)
 texture = ExtResource("2_ren4m")
 centered = false
 
-[node name="handle" type="Sprite2D" parent="lupa"]
+[node name="handle" type="Sprite2D" parent="Lupa"]
 position = Vector2(532, 1084)
 texture = ExtResource("3_4b3nu")
 
 [node name="Lazer" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1877, -6)
 texture = ExtResource("4_ir5b0")
 
@@ -245,6 +247,7 @@ libraries = {
 autoplay = "lazer"
 
 [node name="CompasCase" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(112, 964)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_jtvnq")
@@ -314,30 +317,37 @@ offset_right = 541.0
 offset_bottom = 1593.0
 grow_horizontal = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Win"]
+[node name="TextureRect" type="TextureRect" parent="Win"]
+custom_minimum_size = Vector2(1024, 1024)
 layout_mode = 2
-offset_right = 1144.0
-offset_bottom = 1577.0
+offset_left = 42.0
+offset_top = -19.0
+offset_right = 1186.0
+offset_bottom = 2029.0
+scale = Vector2(0.947869, 0.503903)
+texture = ExtResource("12_iouj2")
+expand_mode = 1
 
-[node name="Label" type="Label" parent="Win/VBoxContainer"]
+[node name="Button" type="Button" parent="Win"]
 layout_mode = 2
+offset_left = 326.0
+offset_top = 755.0
+offset_right = 848.0
+offset_bottom = 895.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 96
+text = "Play again?"
+
+[node name="Label" type="Label" parent="Win"]
+layout_mode = 2
+offset_left = 304.0
+offset_top = 60.0
+offset_right = 876.0
+offset_bottom = 239.0
 size_flags_horizontal = 4
 text = "You killed all bugs!
 Have a good rest!"
 label_settings = SubResource("LabelSettings_73thr")
-
-[node name="TextureRect" type="TextureRect" parent="Win/VBoxContainer"]
-custom_minimum_size = Vector2(768, 704)
-layout_mode = 2
-texture = ExtResource("12_iouj2")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Button" type="Button" parent="Win/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 96
-text = "Play again?"
 
 [node name="Combo" type="Label" parent="."]
 unique_name_in_owner = true
@@ -367,4 +377,4 @@ libraries = {
 unique_name_in_owner = true
 volume_db = 20.0
 
-[connection signal="button_down" from="Win/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="button_down" from="Win/Button" to="." method="_on_button_pressed"]
