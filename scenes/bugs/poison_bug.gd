@@ -12,12 +12,12 @@ var evade_direction := Vector2.ZERO
 
 func process_additional_logic(_delta: float):
 	if evade_direction != Vector2.ZERO:
-		evade_time += _delta
-
 		velocity = evade_direction * speed
 
 
 func update_additional_state(_delta: float):
+	evade_time += _delta
+
 	if evade_time >= max_evade_time:
 		evade_time = 0.0
 		evade_direction = Vector2.ZERO
@@ -31,7 +31,8 @@ func use_super_power():
 	trail.fade_start_time = 1.5
 	GameManager.spawn_scene(trail)
 
-	evade_direction = velocity.rotated(deg_to_rad(90)).normalized()
-	print("evade_direction: ", evade_direction)
-	print("velocity: ", velocity)
+	var angles = [deg_to_rad(90), deg_to_rad(-90)]
+	var random_angle = angles[randi_range(0, 1)]
+
+	evade_direction = velocity.rotated(random_angle).normalized()
 	print("PoisonBug: use_super_power")
