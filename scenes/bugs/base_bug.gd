@@ -17,6 +17,7 @@ const dust_scene := preload("res://scenes/dust/dust.tscn")
 @export var trails_life_time := 10
 @export var max_distance_from_player := 2000
 @export var random_direction_change_time := 2
+@export var bug_color: Color = Color.WHITE
 
 @onready var bug_sprite: BugSprite = %BugSprite
 

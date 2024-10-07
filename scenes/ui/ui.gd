@@ -4,6 +4,12 @@ extends CanvasLayer
 
 @onready var combo_label: Label = %Combo
 @onready var combo_animation: AnimationPlayer = %ComboAnimation
+@onready var combo_audio_player: AudioStreamPlayer = %ComboAudio
+
+var double_kill_sound: AudioStream = preload("res://assets/sfx/double.wav")
+var triple_kill_sound: AudioStream = preload("res://assets/sfx/triple.wav")
+var ultra_kill_sound: AudioStream = preload("res://assets/sfx/ultra.wav")
+var rampage_sound: AudioStream = preload("res://assets/sfx/rampage.wav")
 
 func _ready() -> void:
 	GameManager.bugs_count_changed.connect(update_bug_count)
@@ -26,22 +32,33 @@ func update_win_label_visibility(game_state: GameManager.GameState) -> void:
 	%Win.visible = game_state == GameManager.GameState.WON
 
 func update_combo(combo_count: int):
+	# print("combo:", combo_count)  
 	if combo_count < 2:
 		return
 
 	var combo_text: String
+	var combo_sound: AudioStream
 
 	match combo_count:
 		2:
 			combo_text = "Double kill!"
+			combo_sound = double_kill_sound
 		3:
 			combo_text = "Triple kill!"
+			combo_sound = triple_kill_sound
 		4:
 			combo_text = "Ultra Kill!"
-		5:
+			combo_sound = ultra_kill_sound
+		_:
 			combo_text = "Rampage!"
-
+			combo_sound = rampage_sound
+	
 	if combo_text != null:
+		if combo_audio_player.playing:
+			await combo_audio_player.stream_finished
+			
+		combo_audio_player.stream = combo_sound
+		combo_audio_player.play(0.5)
 		combo_label.text = combo_text
 		combo_animation.play("combo")
 			
