@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://pkv2ya7cjagr"]
+
+[ext_resource type="Script" path="res://scenes/debug_object/debug_object.gd" id="1_5ft6u"]
+[ext_resource type="Texture2D" uid="uid://bbn7qw3d4pdo7" path="res://assets/images/debug_aim.png" id="2_nd6ab"]
+
+[node name="DebugObject" type="Node2D"]
+script = ExtResource("1_5ft6u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nd6ab")

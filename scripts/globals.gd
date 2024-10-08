@@ -63,46 +63,58 @@ func get_random_point_in_rect(rect: Rect2) -> Vector2:
 	return Vector2(random_x, random_y)
 
 
-func get_random_point_in_area(area: Area2D) -> Vector2:
-	var collision_shapes = area.get_children()
-	assert(collision_shapes.size() > 0, "[get_random_point_in_area] Area2D should have at least one CollisionShape2D child")
-	var collision_shape: CollisionShape2D = collision_shapes[0]
-	var global_transform: Transform2D = area.get_global_transform()
-	print(global_transform)
-	var shape: Shape2D = collision_shape.shape
+func apply_transform_2d(point: Vector2, glob_transform: Transform2D) -> Vector2:
+	# Basis form apply scaling and skrewing for 2D. But transform action not. Is must be added manually.
+	return glob_transform.basis_xform(point) + glob_transform.get_origin()  # <===
 
+
+func get_random_point_in_rectangle_shape_2d(rect: RectangleShape2D) -> Vector2:
+	var random_x = randf_range(-rect.extents.x, rect.extents.x)
+	var random_y = randf_range(-rect.extents.y, rect.extents.y)
+	return Vector2(random_x, random_y)
+
+
+func get_random_point_in_circle_shape_2d(circle: CircleShape2D) -> Vector2:
+	var radius = circle.radius * sqrt(randf())  # sqrt to uniform distribution
+	var angle = randf_range(0, PI * 2)
+	var random_point = Vector2(cos(angle), sin(angle)) * radius
+	return random_point
+
+
+func get_random_point_shape_2d(shape: Shape2D, glob_transform: Transform2D) -> Vector2:
 	if shape is RectangleShape2D:
-		var rect_shape = shape as RectangleShape2D
-		var random_x = randf_range(-rect_shape.extents.x, rect_shape.extents.x)
-		var random_y = randf_range(-rect_shape.extents.y, rect_shape.extents.y)
-		print("random_x,y: ", random_x, " ", random_y)
-		return Vector2(random_x, random_y)
+		return apply_transform_2d(get_random_point_in_rectangle_shape_2d(shape), glob_transform)
 
-	#elif shape is CircleShape2D:
-		#var circle_shape = shape as CircleShape2D
-		#var radius = circle_shape.radius * sqrt(randf())  # sqrt для равномерного распределения
-		#var angle = randf_range(0, PI * 2)
-		#var random_point = Vector2(cos(angle), sin(angle)) * radius
-		#return global_transform.basis_xform(random_point)
+	elif shape is CircleShape2D:
+		return apply_transform_2d(get_random_point_in_circle_shape_2d(shape), glob_transform)
 #
 	#elif shape is CapsuleShape2D:
-		#var capsule_shape = shape as CapsuleShape2D
-		#var random_y = randf_range(-capsule_shape.height / 2, capsule_shape.height / 2)
-		#var random_x = randf_range(-capsule_shape.radius, capsule_shape.radius)
-		#return global_transform.basis_xform(Vector2(random_x, random_y))
+	#var capsule_shape = shape as CapsuleShape2D
+	#var random_y = randf_range(-capsule_shape.height / 2, capsule_shape.height / 2)
+	#var random_x = randf_range(-capsule_shape.radius, capsule_shape.radius)
+	#return global_transform.basis_xform(Vector2(random_x, random_y))
 #
 	#elif shape is ConvexPolygonShape2D:
-		#var polygon_shape = shape as ConvexPolygonShape2D
-		#var points = polygon_shape.points
-		#var point_count = points.size()
-		#if point_count > 2:
-			#var idx1 = randi_range(0, point_count - 1)
-			#var idx2 = (idx1 + 1) % point_count
-			#var random_point = points[idx1].lerp(points[idx2], randf())
-			#return global_transform.basis_xform(random_point)
+	#var polygon_shape = shape as ConvexPolygonShape2D
+	#var points = polygon_shape.points
+	#var point_count = points.size()
+	#if point_count > 2:
+	#var idx1 = randi_range(0, point_count - 1)
+	#var idx2 = (idx1 + 1) % point_count
+	#var random_point = points[idx1].lerp(points[idx2], randf())
+	#return global_transform.basis_xform(random_point)
 
-	assert(false, "[get_random_point_in_area] Unsupported shape type: " + str(collision_shape))
+	#assert(false, "[get_random_point_in_area] Unsupported shape type: " + str(collision_shape))
 	return Vector2.ZERO
+
+
+func get_random_point_in_area(area: Area2D) -> Vector2:
+	var collision_shapes = area.get_children()
+	# Randomly select a collision shape and get a random point in it.
+	var random_shape = collision_shapes[randi() % collision_shapes.size()]
+	var global_transform: Transform2D = random_shape.get_global_transform()
+	var shape: Shape2D = random_shape.shape
+	return get_random_point_shape_2d(shape, global_transform)
 
 
 func calc_rect_from_path_2d(path_2d: Path2D) -> Rect2:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dovlibe7rgory"]
+[gd_scene load_steps=12 format=3 uid="uid://dovlibe7rgory"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_5cts8"]
 [ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_3hpfe"]
@@ -27,6 +27,12 @@ size = Vector2(1818, 378)
 radius = 187.0
 height = 1460.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pd00g"]
+size = Vector2(322, 209)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y2d6o"]
+radius = 139.176
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5cts8")
 
@@ -35,6 +41,7 @@ texture = ExtResource("2_3hpfe")
 centered = false
 
 [node name="Player" parent="." instance=ExtResource("3_l6cor")]
+visible = false
 position = Vector2(1000, 733)
 
 [node name="EnemyLocationFactory" parent="." node_paths=PackedStringArray("path_2d") instance=ExtResource("7_0y746")]
@@ -53,20 +60,34 @@ use_bouding_rect = true
 curve = SubResource("Curve2D_bduhs")
 
 [node name="EnemiesBaseArea2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesBaseArea2D"]
 position = Vector2(994, -223)
 shape = SubResource("RectangleShape2D_ohxrq")
 
 [node name="EnemiesDeadArea2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDeadArea2D"]
 position = Vector2(956, 850)
 shape = SubResource("RectangleShape2D_t6m3t")
 
 [node name="ChildBaseArea2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChildBaseArea2D"]
+visible = false
 position = Vector2(979, 825)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_n475f")
+
+[node name="DebugObjectSpawnArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugObjectSpawnArea2D"]
+position = Vector2(981, 444)
+shape = SubResource("RectangleShape2D_pd00g")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DebugObjectSpawnArea2D"]
+position = Vector2(615, 221)
+shape = SubResource("CircleShape2D_y2d6o")
