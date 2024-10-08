@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
+var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
 var speed = 300
 
 

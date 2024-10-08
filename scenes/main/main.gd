@@ -2,10 +2,10 @@ extends Node2D
 
 var enemy_location_factory: RandomLocationFactory
 var enemy_spawn_timer: Timer
-var enemy_scene: PackedScene = preload("res://scenes/enemy.tscn")
+var enemy_scene: PackedScene = preload("res://scenes/enemy/enemy.tscn")
 
 var child_location_factory: RandomLocationFactory
-var child_scene: PackedScene = preload("res://scenes/child.tscn")
+var child_scene: PackedScene = preload("res://scenes/child/child.tscn")
 
 @onready var enemies_base_area_2d: Area2D = $EnemiesBaseArea2D
 @onready var enemies_dead_area_2d: Area2D = $EnemiesDeadArea2D

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dovlibe7rgory"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_5cts8"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_5cts8"]
 [ext_resource type="Texture2D" uid="uid://bydhfdij08l56" path="res://assets/images/background.png" id="2_3hpfe"]
-[ext_resource type="PackedScene" uid="uid://x64fcr5spnwh" path="res://scenes/player.tscn" id="3_l6cor"]
-[ext_resource type="PackedScene" uid="uid://chot4q7evgd4v" path="res://scenes/random_location_factory.tscn" id="7_0y746"]
+[ext_resource type="PackedScene" uid="uid://x64fcr5spnwh" path="res://scenes/player/player.tscn" id="3_l6cor"]
+[ext_resource type="PackedScene" uid="uid://chot4q7evgd4v" path="res://scenes/random_location_factory/random_location_factory.tscn" id="7_0y746"]
 
 [sub_resource type="Curve2D" id="Curve2D_wjdjt"]
 _data = {
