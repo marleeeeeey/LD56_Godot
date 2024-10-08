@@ -17,7 +17,7 @@ var debug_aim_scene: PackedScene = preload("res://scenes/debug_object/debug_obje
 
 
 func _ready() -> void:
-	debug_aim_spawn_timer = Globals.create_timer(0.1, _on_debug_aim_spawn_timer, false)
+	debug_aim_spawn_timer = Globals.create_timer(0.01, _on_debug_aim_spawn_timer, false)
 	return
 	
 	enemy_location_factory = $EnemyLocationFactory
