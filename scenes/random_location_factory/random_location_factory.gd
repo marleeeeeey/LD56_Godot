@@ -14,7 +14,7 @@ func _ready() -> void:
 	assert(path_2d != null, "[RandomLocationFactory] path_2d is not set!")
 	path_follow_2d = PathFollow2D.new()
 	path_2d.add_child(path_follow_2d)
-	bounding_rect = Globals.calc_rect_from_path_2d(path_2d)
+	bounding_rect = Globals.calc_bounding_rect_for_path_2d(path_2d)
 
 
 func get_random_location() -> Vector2:

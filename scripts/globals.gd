@@ -107,7 +107,7 @@ func get_random_point_in_area(area: Area2D) -> Vector2:
 	return get_random_point_shape_2d(shape, global_transform)
 
 
-func calc_rect_from_path_2d(path_2d: Path2D) -> Rect2:
+func calc_bounding_rect_for_path_2d(path_2d: Path2D) -> Rect2:
 	if path_2d.curve.get_point_count() == 0:
 		return Rect2()
 
