@@ -14,7 +14,7 @@ var speed = 150
 
 func _ready() -> void:
 	add_to_group("Child")
-	drift_timer = Globals.create_timer(0, on_drift_timer_timeout)
+	drift_timer = Globals.create_timer(self, 0, on_drift_timer_timeout)
 
 
 func catching_by(enemy: Enemy):
