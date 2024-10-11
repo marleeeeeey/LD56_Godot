@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if Godot is installed
+if ! command -v godot &>/dev/null; then
+    echo "Error: Godot is not installed. Please install it first."
+    exit 1
+fi
+
 # Define variables
 EXPORT_NAME="web"
 RELEASE_FOLDER="./releases"
