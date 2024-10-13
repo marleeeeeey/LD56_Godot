@@ -118,7 +118,7 @@ func _process_common_logic(delta: float):
 
 func _set_walk_state():
 	current_state = State.WALK
-	target_direction = Globals.get_random_direction()
+	target_direction = Utils.get_random_direction()
 	super_power_timer.stop()
 	random_direction_change_timer.start()
 
@@ -167,4 +167,4 @@ func _on_random_direction_change_timer_timeout():
 	if is_far_from_player():
 		target_direction = _get_direction_to_player()
 	else:
-		target_direction = Globals.get_random_direction()
+		target_direction = Utils.get_random_direction()
